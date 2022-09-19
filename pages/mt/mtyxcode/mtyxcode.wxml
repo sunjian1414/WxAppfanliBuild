@@ -1,0 +1,30 @@
+<white-custom bgColor="bg-yellow" isBack="{{true}}">
+  <view slot="content" style="color: white;">选优</view>
+</white-custom>
+<image src="https://www.ifaceai.com/img/mtyx1.png" style="width: 100%;margin-top: {{CustomBar}}px;" mode="widthFix"></image>
+<view style="padding: 0px 10px;">
+  <view class="bg-white" style="text-align: center;border-radius: 10px;">
+    <view style="display: inline-block;margin-top: 20px;margin-bottom: 10px;">
+      <view style="float: left;">
+        <image src="https://www.ifaceai.com/img/3.png" style="width: 50px;" mode="widthFix"></image>
+        <view style="text-align: center;font-size: 16px;">先领券</view>
+      </view>
+      <image src="https://www.ifaceai.com/img/9.png" style="float: left;width: 20px;margin-top: 15px;margin-left: 10px;margin-right: 10px;" mode="widthFix"></image>
+      <view style="float: left;">
+        <image src="https://www.ifaceai.com/img/4.png" style="width: 50px;" mode="widthFix"></image>
+        <view style="text-align: center;font-size: 16px;">再下单</view>
+      </view>
+      <image src="https://www.ifaceai.com/img/9.png" style="float: left;width: 20px;margin-top: 15px;margin-left: 10px;margin-right: 10px;" mode="widthFix"></image>
+      <view style="float: left;">
+        <image src="https://www.ifaceai.com/img/5.png" style="width: 50px;" mode="widthFix"></image>
+        <view style="text-align: center;font-size: 16px;">拿返利</view>
+      </view>
+      <view style="clear: both;"></view>
+    </view>
+    <view style="font-weight: normal; border-top:2px dashed #fbbd08;padding-bottom: 40px;border-bottom-left-radius: 10px;" class="bg-white">
+      <button data-type="0" capture-bind:tap="openTypeHand" style="font-weight: normal; height: 45px;line-height: 45px;font-size: 20px;margin-top: 40px;color:white;width: 250px;" class="cu-btn round bg-yellow button-hover">优选新人专享</button>
+      <button data-type="1" capture-bind:tap="openTypeHand" style="font-weight: normal; border:1px solid orange; height: 45px;line-height: 45px;font-size: 20px;margin-top: 20px;color:orange;width: 250px;background-color: rgb(243, 241, 217);" class="cu-btn round button-hover">美团优选（超级秒杀）</button>
+      <button data-type="2" capture-bind:tap="openTypeHand" style="font-weight: normal; border:1px solid orange; height: 45px;line-height: 45px;font-size: 20px;margin-top: 20px;color:orange;width: 250px;background-color: rgb(243, 241, 217);" class="cu-btn round button-hover">美团优选（超级菜场）</button>
+    </view>
+  </view>
+</view>

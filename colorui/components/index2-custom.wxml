@@ -1,0 +1,9 @@
+<view class="cu-bar fixed {{bgImage!=''?'none-bg text-white bg-img':''}} {{bgColor}}" style="height:{{CustomBar}}px;padding-top:{{StatusBar+5}}px;{{bgImage?'background-image:url(' + bgImage+')':''}}">
+    <view capture-bind:tap="clickHand" style="display: inline-block;float: left;">
+        <image src="https://www.ifaceai.com/img/location.png" style="margin-top: 5px; margin-left: 10px; float: left; width: 20px;" mode="widthFix"></image>
+        <image src="/static/images/loading2.png" style="animation: fadenum 5s infinite; width: 30px;float: left;" mode="widthFix" wx:if="{{cityName==null||cityName==''}}"></image>
+        <text style="float: left;margin-left: 10px;margin-top: 4px;font-size: 16px;" wx:if="{{cityName!=''&&cityName!=null}}">{{cityName}}▽</text>
+        <view style="clear: both;"></view>
+    </view>
+    <input model:value="{{keyword}}" bindinput="inputHand" bindconfirm="inputEnter" type="text" style="float:left; height:30px; border:1px solid red; border-radius:10px;padding-left:5px;margin-left:10px;width:110px;" placeholder="搜门店找优惠" confirm-type="search"></input>
+</view>

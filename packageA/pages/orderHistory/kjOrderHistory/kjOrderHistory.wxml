@@ -1,0 +1,41 @@
+<ui-custom bgColor="bg-red" isBack="{{true}}">
+    <view slot="content">砍价订单</view>
+</ui-custom>
+
+<view class="cu-card article">
+    <view hidden="{{!showSke}}" class="bg-white" style="border-radius: 5px; margin: 0px;">
+        <import src="/pages/index3/index3.skeleton.wxml"/> 
+        <template is="skeleton"/>
+    </view>
+    <view class="cu-item shadow" data-index="{{index}}" wx:for="{{list}}" wx:for-item="item" wx:key="{{index}}">
+        <view class="title">
+            <view class="grid col-2">
+                <view style="line-height: 35px;padding-top: 10px;">
+                    <image wx:if="{{item.shopType=='淘宝'}}" src="https://www.ifaceai.com/img/tb.png" style="margin-top: 4px; width: 25px;float: left;" mode="widthFix"></image>
+                    <image wx:if="{{item.shopType=='京东'}}" src="https://www.ifaceai.com/img/jd1.png" style="margin-top: 4px; width: 25px;float: left;" mode="widthFix"></image>
+                    <image wx:if="{{item.shopType=='拼多多'}}" src="https://www.ifaceai.com/img/pdd2.png" style="margin-top: 4px; width: 25px;float: left;" mode="widthFix"></image>
+                    <text style="float: left;margin-left: 5px;" class="text-green">已砍成</text>
+                </view>
+                <view style="font-weight: normal;text-align: right;">
+                    <text class="text-gray">{{item.kjdate}} 砍成</text>
+                </view>
+            </view>
+        </view>
+        <view class="content">
+            <image src="{{item.showLogo}}" style="width: 200rpx;" mode="widthFix"></image>
+            <view class="desc">
+                <view class="text-content">{{item.shopTitle}}</view>
+                <view>
+                    已砍 ¥<view class="cu-tag" style="font-size: 18px;">{{item.money}}</view>
+                </view>
+            </view>
+        </view>
+        <view style="text-align: right;padding-top: 8px;border-top: 1px solid #ccc;margin-top: 10px;padding-right: 10px;">
+            <button style="line-height: 30px;height: 30px; width: 90px;font-size: 14px;font-weight: normal;" class="cu-btn line-black button-hover">查看物流</button>
+            <button capture-bind:tap="openAddress" style="line-height: 30px;height: 30px; width: 90px;font-size: 14px;font-weight: normal;margin-left: 10px;" class="cu-btn line-black button-hover">收货地址</button>
+        </view>
+    </view>
+    <view class="cu-load load-icon {{!isLoad?'loading':'over'}}"></view>
+    <view class="bg-white" hidden="{{!showTip}}" style="background-color: transparent; padding-top: 10px; text-align: center;">-你是有底线的-</view>
+    <view style="height: 30px;"></view>
+</view>

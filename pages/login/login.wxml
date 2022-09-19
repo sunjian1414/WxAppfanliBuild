@@ -1,0 +1,57 @@
+<view class="bg" style="height: 235px;">
+    <image class="bgimg" src="/static/images/userbg.png"></image>
+    <view style="text-align: center;margin-top: {{CustomBar+10}}px;position: absolute;z-index: 2;width: 100%;">
+        <view style="width: 70px;height: 70px;line-height: 70px;text-align: center;display: inline-block;" class="bg-white round">
+            <image style="width: 60px;margin-top: 5px;" mode="widthFix" src="/static/images/logo.png"></image>
+        </view>
+        <view style="text-align: center;padding-top: 10px;">
+            <text style="background-color: rgba(255,255,255,0.5);padding: 2px 20px 2px 20px;border-radius: 20px;font-size: 16px;" class="text-white">{{appName}}</text>
+        </view>
+    </view>
+</view>
+<view style="padding-top: 20px;">
+    <view style="text-align: center; font-weight: bold;font-size: 16px;">系统初始化</view>
+    <view style="text-align: center; font-size: 14px;color: #999;padding-top: 10px;">资源文件准备中</view>
+</view>
+<view style="text-align: center;">
+    <button class="btn" style="width: 70%;margin-top: 30px;" bindtap="getUserProfile">
+        <block wx:if="{{!isLoad}}">
+            <text wx:if="{{btntxt=='数据初始化'||btntxt=='登录中...'}}" class="cuIcon-loading2 iconfont-spin"></text>
+            {{btntxt}}
+        </block>
+        <block wx:else>
+            {{btntxt}}
+            <text class="stime">剩余{{second}}秒</text>
+        </block>
+    </button>
+</view>
+
+
+
+<view style="position: fixed;bottom: 0px;left: 0px;width: 100%;z-index: 1;padding: 20rpx;border-radius: 0px;overflow:hidden;">
+    
+    <view capture-bind:tap="openGgMenu" style="margin: 20rpx; text-align: center;line-height: 50rpx; position: absolute;z-index: 2; background-color: rgba(0,0,0,0.3);width: 120rpx;height: 50rpx;border-radius: 5px;">
+        <text class="text-white">广告</text><text class="text-white" style="padding-left: 2px;">⏷</text>
+    </view>
+    <view hidden="{{!showGsMenu}}" style="border-radius: 5px; margin-left: 20rpx;margin-top: 15rpx; position: absolute;top: 80rpx; background-color: rgba(0, 0, 0, 0.8);width: 200rpx;height: 60rpx;z-index: 2;">
+        <view capture-bind:tap="hideGg" class="text-white" style="text-align: center;line-height: 60rpx;height: 60rpx;">不感兴趣</view>
+    </view>
+    <swiper style="border-radius: 0px;overflow:hidden;" class="screen-swiper square-dot" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
+        <swiper-item style="border-radius: 10px;overflow:hidden;" wx:for="{{swiperList}}" wx:key="{{index}}" data-index="{{index}}" bind:tap="itemImgClick">
+            <image src="{{item.url}}" style="width: 100%;" mode="widthFix"></image>
+        </swiper-item>
+    </swiper>
+</view>
+
+
+
+<view class="cu-modal {{modalName=='Image'?'show':''}}">
+    <view class="cu-dialog">
+        <view>
+            <image mode="widthFix" src="https://www.ifaceai.com/img/facecode.jpg"></image>
+        </view>
+        <view class="cu-bar bg-white">
+            <view capture-bind:tap="downCodeHand" class="action margin-0 flex-sub solid-left" bindtap="hideModal">扫一扫</view>
+        </view>
+    </view>
+</view>

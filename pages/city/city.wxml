@@ -1,0 +1,37 @@
+<ui-custom bgColor="bg-white" isBack="{{true}}">
+    <view slot="content">城市选择</view>
+</ui-custom>
+<scroll-view scroll-y class="indexes" scroll-into-view="indexes-{{listCurID}}" style="height:calc(100vh - {{CustomBar}}px - 50px)" scroll-with-animation="true" enable-back-to-top="true">
+    <view class="padding">定位城市</view>
+    <view class="bg-white" style="padding: 10px 0 10px 0;text-align: left;">
+        <view style="text-align: center;" wx:if="{{dList.length<=0}}">
+            <text style="font-size: 20px;" class="cuIcon-loading2 iconfont-spin"></text>
+        </view>
+        <view wx:for="{{dList}}" data-index="{{index}}" wx:key="{{index}}" style="display: inline-block;margin: 5px 0px 5px 10px;width: 80px;text-align: center;padding:7px 0 7px 0;" class="{{index==0?'bg-blue':'bg-gray'}}">{{item.name}}</view>
+    </view>
+    <view class="padding">热门城市</view> 
+    <view class="bg-white" style="padding: 10px 0 10px 0;text-align: left;">
+        <view capture-bind:tap="rItemClick" wx:for="{{rList}}" data-index="{{index}}" wx:key="{{index}}" style="display: inline-block;margin: 5px 0px 5px 10px;width: 80px;text-align: center;padding:7px 0 7px 0;" class="{{item.id==cityId?'bg-blue':'bg-gray'}}">{{item.name}}</view>
+    </view>
+    <block wx:for="{{list}}" wx:key>
+        <view class="padding indexItem-{{list[index].py}}" id="indexes-{{list[index].py}}" data-index="{{list[index].py}}">{{list[index].py}}</view>
+        <view class="cu-list menu-avatar no-padding">
+            <view capture-bind:tap="itemClick" class="cu-item" style="height: 40px;width: 100%;" wx:for="{{item.list}}" wx:key wx:for-index="sub" data-index="{{sub}}" data-pindex="{{index}}" wx:for-item="info">
+                <view class="content" style="border-bottom: 1px solid #f1f1f1; height: 100%;line-height: 40px; width: 100%; left: 15px;position: relative;">
+                    <view class="text-grey">{{info.name}}
+                        <text wx:if="{{info.id==cityId}}" class="cuIcon-check lg text-blue" style="position: absolute;right: 50px;font-weight: bold;font-size: 20px;"></text>
+                    </view>
+                </view> 
+            </view> 
+        </view>
+    </block>
+</scroll-view>
+<view class="indexBar" style="height:calc(100vh - {{CustomBar}}px - 50px)">
+    <view class="indexBar-box" bindtouchstart="tStart" bindtouchend="tEnd" catchtouchmove="tMove">
+        <view class="indexBar-item" wx:for="{{list}}" wx:key id="{{index}}" bindtouchstart="getCur" bindtouchend="setCur">{{list[index].py}}</view>
+    </view>
+</view>
+<!--选择显示-->
+<view hidden="{{hidden}}" class="indexToast">
+    {{listCur}}
+</view>

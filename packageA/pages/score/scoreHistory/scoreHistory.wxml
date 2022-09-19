@@ -1,0 +1,38 @@
+<ui-custom bgColor="bg-blue" isBack="{{true}}">
+    <view slot="content">抽奖记录</view>
+</ui-custom>
+<view style="padding-top:20rpx;background-image: linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%);height: 240rpx;">
+    <view class="text-white" style="text-align: center;">总积分</view>
+    <view class="text-white" style="padding-top: 20rpx; text-align: center;font-size: 30px;">
+        <text wx:if="{{userScore==null}}" style="font-size: 20px;color: #999;" class="cuIcon-loading2 iconfont-spin"></text>
+        <text wx:if="{{userScore!=null}}">{{userScore}}</text>
+    </view>
+    <view class="grid col-2 text-white" style="padding-top: 20rpx;">
+        <view style="text-align: center;border-right: 1px solid white;">总下注积分：{{xzVal}}</view>
+        <view style="text-align: center;">总中奖积分：{{score}}</view>
+    </view>
+</view>
+<view class="bg-gray" style="padding: 8px;">一周内明细</view>
+
+
+<view class="grid col-2">
+    <view style="text-align: left;padding: 10rpx 0 0 90rpx;">时间</view>
+    <view style="text-align: right;padding: 10rpx 60rpx 0 0;">奖品</view>
+</view>
+<view class="cu-list menu sm-border"> 
+    <view class="cu-item" wx:for="{{list}}" wx:for-item="item" wx:key="{{index}}">
+        <view class="content">
+            <text class="cuIcon-title text-green"></text>
+            <text class="text-grey">{{item.create_date}}</text>
+        </view>
+        <view class="action">
+            <view class="cu-tag round bg-blue light">{{item.score}}积分</view>
+        </view>
+    </view>
+</view>
+
+<view style="text-align: center;">
+    <text wx:if="{{shwoLoading}}" style="font-size: 20px;color: #999;" class="cuIcon-loading2 iconfont-spin"></text>
+</view>
+
+<view wx:if="{{showPreload}}" style="text-align: center;color: #999;">-我是有底线的-</view>

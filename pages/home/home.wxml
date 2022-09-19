@@ -1,0 +1,62 @@
+
+<ui-custom bgColor="bg-black" isBack="{{false}}">
+    <view slot="content">首页商城</view>
+</ui-custom>
+
+<view style="border-bottom-left-radius: 40px;border-bottom-right-radius: 40px; position: fixed;top: 0px;width: 100%;height: 170px;" class="bg-black">
+</view>
+
+
+<view class="sw"> 
+
+    <swiper style="height: 140px;padding-top: 15px;" class="card-swiper round-dot" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500" bindchange="cardSwiper" indicator-color="#8799a3" indicator-active-color="#0081ff">
+        <swiper-item style="width: 100%;" wx:for="{{swiperList}}" wx:key="index" class="{{cardCur==index?'cur':''}}">
+            <view data-index="{{index}}" capture-bind:tap="banItemClick" class="swiper-item" style="border-radius: 20px;padding: 0px;">
+                <image src="{{item.url}}" style="width: 100%;height: 100%;"></image>
+            </view>
+        </swiper-item>
+    </swiper> 
+
+    
+
+
+    <scroll-view style="margin-top: 0rpx; padding: 0px 10px 0 10px;font-size: 16px;" scroll-x class="nav" scroll-with-animation scroll-left="{{scrollLeft}}">
+        <view style="width: 85px;text-align: center;" class="cu-item {{index==TabCur?'text-orange cur':''}}" wx:for="{{typeList}}" wx:key bindtap="tabSelect" data-index="{{index}}">
+            {{item.type}}
+        </view>
+    </scroll-view>
+</view>
+
+
+<view style="padding-left: 10px;padding-right: 10px;height: {{_ch}}px;overflow-y: auto;">
+    <view class="grid col-2" style="max-height: 600rpx;" wx:if="{{index%2==0}}" wx:for="{{list}}" wx:key="{{index}}">
+        <view catchtap="itemClick" data-index="{{index}}" style="padding: 0 5px 10px 0;" class="bg-white">
+            <image src="{{item.img}}" style="max-height: 380rpx;" mode="widthFix"></image>
+            <view class="goods-card__title" style="margin: 10px;">{{item.content}}</view>
+            <view style="padding: 0px 10px 0 10px;">
+                <text style="font-weight: bold;" class="text-red">¥</text>
+                <text style="font-size: 24px;padding-left: 5px;" class="text-red">{{item.price}}</text>
+                <image data-index="{{index}}" catchtap="addGwc" src="/static/images/gwc.png" style="width: 30px;float: right;" mode="widthFix"></image>
+            </view>
+        </view>
+        <view catchtap="itemClick" class="bg-white" data-index="{{index+1}}" wx:if="{{index+1<list.length}}" style="padding: 0 0 10px 5px;">
+            <image src="{{list[index+1].img}}" mode="widthFix"></image>
+            <view style="margin: 10px;" class="goods-card__title">{{list[index+1].content}}</view>
+            <view style="padding: 0px 10px 0 10px;">
+                <text style="font-weight: bold;" class="text-red">¥</text>
+                <text style="font-size: 24px;padding-left: 5px;" class="text-red">{{list[index+1].price}}</text>
+                <image data-index="{{index+1}}" catchtap="addGwc" src="/static/images/gwc.png" style="width: 30px;float: right;" mode="widthFix"></image>
+            </view>
+        </view>
+    </view> 
+    <view class="cu-load load-icon {{isLoad?'over':'loading'}}"></view>
+    <view hidden="{{!isLoad}}" style="padding-bottom: 350rpx; text-align: center;color: #999;height: 50px;line-height: 50px;">-更多商品上架中-</view>
+</view>
+
+<view class="dot" animation="{{ani}}" hidden="{{!showdot}}">+1</view>
+
+
+<view catchtap="openShopCar" id="shopcar" class="bg-white" style="border-radius: 50%;; width:100rpx;height: 100rpx; position: fixed;right: 50rpx;bottom: 50rpx;z-index: 2;">
+    <image src="/static/images/gwc1.png" style="width: 100rpx;" mode="widthFix"></image>
+    <text style="position: absolute;right: 40rpx;top: 10rpx;" class="text-white">{{count}}</text>
+</view>

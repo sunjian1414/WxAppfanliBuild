@@ -1,0 +1,74 @@
+<ui-custom bgColor="bg-red" isBack="{{true}}">
+    <view slot="content">咚咚抢</view>
+</ui-custom>
+<view style="background-size: 100% auto; background-image: url('https://www.ifaceai.com/img/personal-center-top.png');height: 140px;">
+    <view style="text-align: center;font-size: 30px;padding-top: 30px;font-weight: bold;">
+        <text style="color: white;">整点</text>
+        <text style="color: orange;padding-left: 10px;">限时抢</text>
+    </view>
+    <view style="text-align: center;color: white;padding-top: 20px;">
+        <view><text class="cuIcon-peoplelist lg text-gray" style="color: white;margin-right: 5px;"></text>多层人工严选<text style="margin-left: 10px;">/</text><text class="cuIcon-choiceness lg text-gray" style="color: white;margin-right: 5px;margin-left: 10px;"></text>独家超值特惠<text style="margin-left: 10px;margin-right: 10px;">/</text><text class="cuIcon-time lg text-gray" style="color: white;margin-right: 5px;"></text>每日实时上新</view>
+    </view>
+</view>
+<scroll-view style="font-size: 16px;margin-top: 0px;padding:0 10px 0 10px;" scroll-x class="nav" scroll-with-animation scroll-left="{{scrollLeft}}">
+    <view style="text-align: center; height: 60px;" class="cu-item {{index==TabCur?'text-red cur':''}}" wx:for="{{typeList}}" wx:key bindtap="tabSelect" data-index="{{index}}" data-value="{{item.value}}">
+        <text style="height: 20px;display: block;">{{item.title}}</text>
+        <text style="text-align: center;">{{item.remark}}</text>
+    </view>
+</scroll-view>
+
+
+<view>
+    <view class="cu-card article" style="background-color: white;">
+        <view hidden="{{!showSke}}" class="bg-white" style="border-radius: 5px; margin: 0px;">
+            <import src="../../index3/index3.skeleton.wxml"/>
+            <template is="skeleton"/>
+        </view>
+        <view capture-bind:tap="shopItemClick" data-index="{{index}}" wx:for="{{showDataList}}" wx:for-item="info" wx:key="{{index}}" class="cu-item shadow" style="border-top: 1px solid #f1f1f1; height: 150px;margin-bottom: 0px;margin-top: 0px;margin-right: 0px;">
+            <view class="content" style="padding-top: 10px;height: 100%;padding-left: 0px;">
+                <image src="{{info.img}}" style="height: 100%;width: 170px;" mode="aspectFill"></image>
+                <view class="" style="width: 100%;">
+                    <view style="font-size: 18px;min-height: auto;height: 40px;line-height: 20px;" class="text_small">{{info.title}}</view>
+                    <view style="padding-top: 5px;">
+                        <image wx:if="{{info.type=='美团优选'}}" style="float: left; width: 18px;height: 18px;" src="https://www.ifaceai.com/img/mtyx.png"></image>
+                        <image wx:if="{{info.type=='拼多多'}}" style="float: left; width: 18px;height: 18px;" src="https://www.ifaceai.com/img/pdd2.png"></image>
+                        <image wx:if="{{info.type=='淘宝'}}" style="float: left; width: 18px;height: 18px;" src="https://www.ifaceai.com/img/tb.png"></image>
+                        <image wx:if="{{info.type=='京东'}}" style="float: left; width: 18px;height: 18px;" src="https://www.ifaceai.com/img/jd1.png"></image>
+                        <text style="width: 70%; float: left;margin-left: 5px;">{{info.dName}}</text>
+                    </view>
+                    <view style="clear: both;margin-top: 30px;">
+                        <view>
+                            <view style="float: left; text-align: center; background-image: url('https://www.ifaceai.com/img/coupon.png');background-repeat: repeat;background-size: 100% 100%;width: 80px;height: 25px;line-height: 25px;">
+                                <text style="color: white;padding-left: 15px;font-size: 14px;">{{info.jMoney}}</text>
+                            </view>
+                            <view style="clear: both;"></view>
+                        </view>
+                        <view style="height: 40px;line-height: 40px;position: relative;">
+                            <text style="color: red;font-size: 18px;">¥ </text>
+                            <text style="color: red;font-size: 20px;font-weight: bold;">{{info.money}}</text>
+                            <text style="color: #999;padding-left: 5px;font-size:14px;">原价¥{{info.oldMoney}}</text>
+                            <block wx:if="{{info.btn==false}}">
+                                <view class="" style="color: white; background-color: rgb(248, 85, 85); border-radius: 10px; width: 90px;height: 45px;line-height: 45px;padding-top: 2px;position: absolute;right: 0px; bottom: 15px;">
+                                    <view style="text-align: center; height: 25px;line-height: 20px;">已抢{{info.sCount}}件</view>
+                                    <view class="cu-progress round margin-top xs" style="height: 10px;line-height: 10px;position: absolute;width: 80px;margin-left: 5px; margin-top: 0px;">
+                                        <view class="bg-white" style="width:61.8%;"></view>
+                                    </view>
+                                </view>
+                            </block>
+                            <block wx:if="{{info.btn==true}}">
+                                <view class="bg-green" style="color: white; border-radius: 10px; width: 90px;height: 45px;line-height: 45px;padding-top: 2px;position: absolute;right: 0px; bottom: 15px;">
+                                    <view style="text-align: center; height: 25px;line-height: 20px;">即将开始</view>
+                                    <view class="cu-progress round margin-top xs" style="height: 10px;line-height: 10px;position: absolute;width: 80px;margin-left: 5px; margin-top: 0px;">
+                                        <view class="bg-white" style="width:61.8%;"></view>
+                                    </view>
+                                </view>
+                            </block>
+
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="cu-load load-icon {{!isLoad?'loading':'over'}}"></view>
+</view>

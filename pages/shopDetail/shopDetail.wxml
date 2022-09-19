@@ -1,0 +1,272 @@
+<back-custom></back-custom>
+<view hidden="{{!showApp}}">
+    <swiper class="screen-swiper square-dot" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500" style="min-height: 500rpx;">
+        <swiper-item wx:for="{{swiperList}}" wx:key="{{index}}" data-index="{{index}}" bind:tap="itemImgClick">
+            <image src="{{item.url}}" mode="aspectFill"></image>
+        </swiper-item>
+    </swiper>
+    <view style="background-color: #f1f1f1;">
+        
+        <view style="background-color: white;padding: 10px 10px 0 10px;">
+            <view class="grid col-2">
+                <view style="color: red;">
+                    ¥<text style="font-size: 20px;padding-left: 5px;">{{info.money}}</text>
+                    <text style="margin-left: 10px; padding: 2px 10px 2px 10px; font-size: 12px; border-radius: 20px;background-color: rgb(241, 214, 214);">券后价</text>
+                    <view><text style="color: #ccc;text-decoration: line-through;">原价 ¥ {{info.oldMoney}}</text></view>
+                </view>
+                <view style="text-align: right;">
+                    <text style="font-size: 12px;color: red;" wx:if="{{info.from==null}}">预估收益 ¥ {{info.anceMoney}}</text>
+                    <view style="padding-top: 5px;"><text style="color: #ccc;">销量 {{info.sCount}}</text></view>
+                </view>
+            </view>
+        </view>
+        
+        <view style="padding:10px;background-color: white;">
+            <view style="font-size: 16px;">
+                <image wx:if="{{info.type=='拼多多'}}" src="https://www.ifaceai.com/img/pdd2.png" style="width: 17px;" mode="widthFix"></image>
+                <image wx:if="{{info.type=='淘宝'}}" src="https://www.ifaceai.com/img/tb.png" style="width: 17px;" mode="widthFix"></image>
+                <image wx:if="{{info.type=='京东'}}" src="https://www.ifaceai.com/img/jd1.png" style="width: 17px;" mode="widthFix"></image>
+                <image wx:if="{{info.type=='抖音'}}" src="https://www.ifaceai.com/img/douyin.png" style="width: 17px;" mode="widthFix"></image>
+                <text style="line-height: 25px;padding-left: 5px;">{{info.title}}</text>
+            </view>
+            <view capture-bind:tap="goPath" style="padding-top: 10px;position: relative;">
+                <image src="https://www.ifaceai.com/img/details_coupon@2x.png" style="width: 100%;" mode="widthFix"></image>
+                <view style="position: absolute;left: 17%;top: 25%;">
+                    <view style="font-size: 20px;">{{info.jMoney}}</view>
+                    <text style="line-height: 30px; padding-left: 2px;font-size: 14px;color: #999;">{{info.jMoneyStartDate}}-{{info.jMoneyEndDate}}</text>
+                </view>
+                <text style="position: absolute;top: 38%;right: 10px;color: white;font-size: 18px;">立即领券</text>
+            </view>
+        </view>
+        
+        <view style="background-color:white;padding:10px;">
+            <text style="font-size: 16px;">推荐理由：</text>
+            <text>{{info.shopDesc}}</text>
+        </view>
+        <view style="text-align: center;color: #999;padding:15px">
+            -宝贝详情-
+        </view>
+        <view>
+            <video style="width: 100%;" src="{{item}}" wx:for="{{info.videoList}}" wx:for-item="item" wx:key="{{index}}"></video>
+            <image wx:for-item="item" wx:key="{{index}}" wx:for="{{info.imgList}}" src="{{item}}" mode="widthFix" style="width: 100%;"></image>
+        </view>
+        <view class="bg-white" wx:if="{{info.type=='淘宝'}}">
+            <view class="cu-bar bg-white solid-bottom">
+                <view class="action">
+                    <text class="cuIcon-titles text-orange"></text>宝贝评价({{feedCount}})
+                </view>
+                <view class="action text-red"></view>
+            </view>
+            <view class="cu-card dynamic no-card">
+                <view style="margin-bottom: 20px;" class="cu-item shadow" wx:for="{{feedList}}" wx:for-item="item" wx:key="{{index}}">
+                    <view class="cu-list menu-avatar">
+                        <view class="cu-item" style="height: 50px;">
+                            <view class="content flex-sub" style="left: 15px;">
+                                <view>{{item.userName}}</view>
+                                <view class="text-gray text-sm flex justify-between">
+                                    {{item.date}}
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                    <view style="margin: 0  0 10px 15px;padding-left: 5px;border-left: 1px solid #cccccc;">
+                        已购商品:{{item.skuMap}}
+                    </view>
+                    <view class="text-content">
+                        {{item.content}}
+                    </view>
+                    <view wx:if="{{item.imgList!=null}}" class="grid flex-sub padding-lr col-3 grid-square">
+                        <view wx:for="{{item.imgList}}" wx:for-item="info" class="bg-img" style="background-image:url({{info}});">
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="cu-load load-icon {{isLoad?'over':'loading'}}"></view>
+            <view hidden="{{!isLoad}}" style="text-align: center;color: #999;height: 50px;line-height: 50px;">-我是有底线的-</view>
+        </view>
+        <view style="height:60px;"></view>
+    </view>
+    
+    <view style="position: fixed;padding-bottom: 10px; bottom: 0px;left: 0px;height: 70px;width: 100%;border-top: 1px solid #999;background-color: white;z-index: 99;">
+        <view class="grid col-2" style="width: 100px;padding-left: 0px;float: left;padding-top: 7px;">
+            <view capture-bind:tap="goHome" style="text-align: center;">
+                <image src="https://www.ifaceai.com/img/home1.png" style="width: 25px;" mode="widthFix"></image>
+                <view>首页</view>
+            </view>
+            <view capture-bind:tap="showModal" style="text-align: center;">
+                <image src="https://www.ifaceai.com/img/details_bar_collect.png" style="margin-top: 3px; width: 22px;" mode="widthFix"></image>
+                <view>海报</view>
+            </view>
+        </view>
+        <view style="float: right;">
+            <view class="grid col-3" style="width: 250px;border-radius: 20px;overflow: hidden;height: 45px; margin-top: 7px;margin-right: 10px;">
+                <view capture-bind:tap="openKj" style="color: white; background-color: {{showKjBtn?'orange':'gray'}};text-align: center;padding-top: 5px;">
+                    <block wx:if="{{showKjBtn}}">
+                        <view>0元购</view>
+                        <view style="font-size: 12px;">开始助力</view>
+                    </block>
+                    <block wx:if="{{showKjBtn==false}}">
+                        <view>0元购</view>
+                        <view style="font-size: 12px;">不支持</view>
+                    </block>
+
+                </view>
+                <view capture-bind:tap="showModal" style="background-color: #cc7a7a;color: white;text-align: center;padding-top: 5px;">
+                    <block wx:if="{{info.from==null}}">
+                        <view>分享赚</view>
+                        <view>¥ {{info.anceMoney}}</view>
+                    </block>
+                    <view wx:if="{{info.from!=null}}" style="font-weight: bold; padding-top: 6px;font-size: 16px;">
+                        <text style="font-size:18px;margin-right:5px;" class="cuIcon-share lg text-white"></text>分享
+                    </view>
+                </view>
+                <view capture-bind:tap="goPay" style="background-color: red;text-align: center;padding-top: 5px;color: white;">
+                    <block wx:if="{{info.from==null}}">
+                        <view>去购物</view>
+                        <view>省 ¥ {{info.money}}</view>
+                    </block>
+                    <view wx:if="{{info.from!=null}}" style="font-weight: bold; padding-top: 6px;font-size: 16px;">
+                        <text style="font-size:18px;margin-right:5px;" class="cuIcon-choiceness lg text-white"></text>去购买
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    
+    <view class="cu-modal bottom-modal {{modalName=='bottomModal'?'show':''}}">
+        <view class="cu-dialog" style="border-top-left-radius: 10px;border-top-right-radius: 10px;">
+            <view style="padding: 20px;">
+                <view class="grid col-3">
+                    <view></view>
+                    <view style="font-size: 18px;padding-top: 7px;">分享文案</view>
+                    <view style="text-align: right;">
+                        <view capture-bind:tap="hideModal" style="display: inline-block;display: inline-block;padding: 10px;">
+                            <image style="width: 20px;" mode="widthFix" src="https://www.ifaceai.com/img/cancel1.png"></image>
+                        </view>
+                    </view>
+                </view>
+                <view style="background-color: #f1f1f1;margin-top: 10px;border-radius: 20px;">
+                    <view style="color: #999; padding: 10px;font-size: 16px;text-align: left;">
+                        {{info.title}}
+                        <view>【原价】{{info.oldMoney}}元</view>
+                        <view>【券后价】{{info.money}}元</view> 
+                        <view>------------</view>
+                        <view>【下单{{info.type=='抖音'?'口令':'地址'}}】<text wx:if="{{shareInfo==null}}" class="cuIcon-loading2 iconfont-spin"></text><text wx:if="{{shareInfo!=null}}">{{shareInfo.h5}}</text> </view>
+                    </view>
+                </view>
+                <view class="grid col-4" style="margin-top: 15px;">
+                    <view capture-bind:tap="copyTxt">
+                        <image style="width: 50px;" mode="widthFix" src="https://www.ifaceai.com/img/detail_copy.png"></image>
+                        <view>复制文案</view>
+                    </view>
+                    <view>
+                        <button open-type="share" class="cu-btn" style="font-weight: normal; width: auto;height: 70px;background-color: transparent; margin: 0px;padding: 0px;">
+                            <view>
+                                <image style="width: 55px;" mode="widthFix" src="https://www.ifaceai.com/img/detail_wechat.png"></image>
+                                <view style="padding-top: 0px;">分享好友</view>
+                            </view>
+                        </button>
+                    </view>
+                    <view capture-bind:tap="shareHb">
+                        <image style="width: 50px;" mode="widthFix" src="https://www.ifaceai.com/img/detail_poster.png"></image>
+                        <view>分享海报</view>
+                    </view>
+                    <view capture-bind:tap="shareHb">
+                        <image style="width: 50px;" mode="widthFix" src="https://www.ifaceai.com/img/detail_pic.png"></image>
+                        <view>保存图片</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+
+
+    
+    <view hidden="{{!showHb}}" style="background-color: rgba(0,0,0,0.4);width: 100%;height: 100%;position: fixed;z-index: 999;left: 0px;top: 0px;">
+        <view class="bg-white sw">
+            <canvas type="2d" style="width: 100%; height: 570px;" id="firstCanvas" canvas-id="firstCanvas"></canvas>
+            <view class="grid col-2" style="width: 100%;">
+                <view>
+                    <button capture-bind:tap="saveImg" style="width: 100%;height: 40px;" class="cu-btn">保存相册</button>
+                </view>
+                <view>
+                    <button capture-bind:tap="closeHb" style="width: 100%;height: 40px;" class="cu-btn">关闭</button>
+                </view>
+            </view>
+        </view>
+    </view>
+
+
+
+
+    <view class="cu-modal {{modalName2=='DialogModal2'?'show':''}}">
+        <view class="cu-dialog" style="overflow: hidden; border-radius: 15px;background-color: transparent;">
+            <view class="cu-bar bg-white justify-end" style="height: 65px;">
+                <view class="content" style="height: auto; color: black;font-size: 18px;padding: 20px 0 20px 0;">
+                    购买商品</view>
+            </view>
+            <view class="bg-white">
+                <view style="padding: 10px; background-color: #f1f1f1;margin: 0 15px 0 15px;border-radius: 10px;">
+                    <view class="text_small" style="font-size: 16px;line-height: 22px;height: auto;min-height: auto;text-align: center;">
+                        {{info.title}}
+                    </view>
+                    <view class="grid col-2" style="margin-top: 10px;">
+                        <view style="text-decoration: line-through;text-align: left;">{{info.oldMoney}}</view>
+                        <view style="color: red;text-align: right;"><text>券后价 ¥ </text><text style="font-size: 16px;">{{info.money}}</text></view>
+                    </view>
+                    <view style="color: black;font-size: 18px;text-align: left;padding-top: 20px;font-weight: bold;">
+                        {{shareInfo.path}}
+                    </view>
+                </view>
+            </view>
+            <view class="bg-white" style="text-align: left;padding: 10px 0 10px 25px;color: #999;">复制这段文字，打开TB APP下箪</view>
+            <view class="bg-white" style="border-bottom-left-radius: 15px;border-bottom-right-radius: 15px; padding-bottom: 20px;padding-top: 10px;">
+                <button capture-bind:tap="copyTbPwd" class="cu-btn round bg-orange button-hover" style="font-size: 18px; height: 40px;margin-left: 15px;margin-right: 15px;width:-webkit-fill-available;">一键复制</button>
+            </view>
+            <view style="padding-top:10px">
+                <image capture-bind:tap="hideModal" style="width: 50px;" src="https://www.ifaceai.com/img/close.png" mode="widthFix"></image>
+            </view>
+        </view>
+
+    </view>
+</view>
+
+<view style="margin-top: 200px;width: 80%;margin-left: 10%;position: fixed;z-index: 1;">
+    <view style="text-align: center;color: #999;padding-bottom: 10px;">- {{info.type}}商品加载 -</view>
+    <view class="cu-progress round sm striped active">
+        <view class="bg-orange" style="width:{{loadDataProgressValue+'%'}};font-size: 20px;">{{loadDataProgressValue>=100?'急速加载中':loadDataProgressValue+'%'}}</view>
+    </view>
+</view>
+
+
+
+<view class="cu-modal {{modalName=='Image'?'show':''}}">
+    <view class="cu-dialog">
+        <view>
+            <view style="padding: 10px;">抖音二维码</view>
+            <image src="{{shareInfo.img}}" style="width: 90%;" mode="widthFix"></image>
+            <view class="cu-steps" style="padding-bottom: 10px;">
+                <view class="cu-item text-grey">
+                    <text class="cuIcon-usefullfill"></text> 保存图片
+                </view>
+                <view class="cu-item text-grey">
+                    <text class="cuIcon-usefullfill"></text> 打开抖音
+                </view>
+                <view class="cu-item text-grey">
+                    <text class="cuIcon-usefullfill"></text> 扫一扫
+                </view>
+            </view>
+        </view>
+        <view class="cu-bar bg-white">
+            <view class="grid col-2" style="width: 100%;line-height: 80rpx;">
+                <view>
+                    <view class="action margin-0 flex-sub solid-left" bindtap="hideModal">关闭</view>
+                </view>
+                <view>
+                    <view capture-bind:tap="saveDyImg" class="action margin-0 flex-sub solid-left">保存</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

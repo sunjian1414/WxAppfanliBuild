@@ -1,0 +1,28 @@
+<ui-custom bgColor="bg-red" isBack="{{true}}">
+    <view slot="content" style="color: white;">在线点餐</view>
+</ui-custom>
+<image src="https://www.ifaceai.com/img/23-35-15.png" style="width: 100%;" mode="widthFix"></image>
+<view style="margin: 0px 10px;border-radius: 10px;padding-bottom: 25px;" class="bg-white">
+    <image src="https://www.ifaceai.com/img/23-35-21.png" style="height: 40px;margin: 10px 0 0 25px;" mode="heightFix"></image>
+    <image src="https://www.ifaceai.com/img/23-35-24.png" style="margin: 10px 20px 0 20px;" mode="widthFix"></image>
+    <view style="padding: 20px;">
+        <view class="item grid col-2" data-type="0" capture-bind:tap="itemClick">
+            <view style="text-align: center;padding-top: 10px;">
+                <image src="https://www.ifaceai.com/img/23-35-26.png" style="display: inline-block; width: 50px;" mode="widthFix"></image>
+                <view class="text-white align-center" style="font-weight: bold;">肯德基</view>
+            </view>
+            <view style="text-align: center;padding-top: 30px;">
+                <button class="cu-btn bg-red round" style="height: 35px;line-height: 35px; font-size: 16px;width: 110px;">立即点餐</button>
+            </view>
+        </view>
+        <view class="item grid col-2" style="margin-top: 20px;" data-type="1" capture-bind:tap="itemClick">
+            <view style="text-align: center;padding-top: 10px;">
+                <image src="https://www.ifaceai.com/img/23-35-29.png" style="display: inline-block; width: 50px;" mode="widthFix"></image>
+                <view class="text-white align-center" style="font-weight: bold;">麦当劳</view>
+            </view>
+            <view style="text-align: center;padding-top: 30px;">
+                <button class="cu-btn bg-red round" style="height: 35px;line-height: 35px; font-size: 16px;width: 110px;">立即点餐</button>
+            </view>
+        </view>
+    </view>
+</view>

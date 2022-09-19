@@ -1,0 +1,78 @@
+<ui-custom bgColor="bg-red" isBack="{{true}}">
+    <view slot="content">实时疯抢榜</view>
+</ui-custom>
+<view style="border-bottom-left-radius: 30px;border-bottom-right-radius: 30px; background-size: 100% auto; background-image: url('https://www.ifaceai.com/img/personal-center-top.png');height: 220px;">
+    <scroll-view style="background-color: transparent; font-size: 16px;padding: 0px;" scroll-x class="nav" scroll-with-animation scroll-left="{{scrollLeft}}">
+        <view style="color: white;" class="cu-item {{index==TabCur?'text-white cur':''}}" wx:for="{{typeList}}" wx:key bindtap="tabSelect" data-index="{{index}}" data-id="{{item.id}}" style="text-align: center;width: 85px;">
+            {{item.name}}
+        </view>
+    </scroll-view>
+
+    <view class="grid col-3 text-center" style="margin-top: 5px;border-radius: 10px;">
+        <view style="padding-top: 10px;">
+            <view class="bg-white" style="padding: 5px; margin:5px;border-radius: 10px;overflow: hidden;">
+                <image src="{{twoObj.img}}" style="height: 100px;" mode="heightFix"></image>
+                <button class="cu-btn text-white bg-orange" style="width: 100%;font-size: 12px;border-radius: 10px;">2小时疯抢{{twoObj.hSCount}}件</button>
+                <view class="text_small_1" style="padding-top: 4px;">{{twoObj.title}}</view>
+                <view class="text-orange" style="padding-top:4px;"><text>¥</text><text style="font-size: 16px;margin-left: 2px;">{{twoObj.money}}</text><text style="margin-left: 5px;">券后</text></view>
+            </view>
+        </view>
+        <view>
+            <view class="bg-white" style="padding: 5px; margin:5px;border-radius: 10px;overflow: hidden;">
+                <image src="{{oneObj.img}}" style="height: 100px;" mode="heightFix"></image>
+                <button class="cu-btn text-white bg-orange" style="width: 100%;font-size: 12px;border-radius: 10px;">2小时疯抢{{oneObj.hSCount}}件</button>
+                <view class="text_small_1" style="padding-top: 4px;">{{oneObj.title}}</view>
+                <view class="text-orange" style="padding-top:4px;"><text>¥</text><text style="font-size: 16px;margin-left: 2px;">{{oneObj.money}}</text><text style="margin-left: 5px;">券后</text></view>
+            </view>
+        </view>
+        <view style="padding-top: 10px;">
+            <view class="bg-white" style="padding: 5px; margin:5px;border-radius: 10px;overflow: hidden;">
+                <image src="{{thereObj.img}}" style="height: 100px;" mode="heightFix"></image>
+                <button class="cu-btn text-white bg-orange" style="width: 100%;font-size: 12px;border-radius: 10px;">2小时疯抢{{thereObj.hSCount}}件</button>
+                <view class="text_small_1" style="padding-top: 4px;">{{thereObj.title}}</view>
+                <view class="text-orange" style="padding-top:4px;"><text>¥</text><text style="font-size: 16px;margin-left: 2px;">{{thereObj.money}}</text><text style="margin-left: 5px;">券后</text></view>
+            </view>
+        </view>
+    </view>
+</view>
+
+<view class="bg-white" style="margin-top: 50px;">
+    <view>
+        <view class="cu-card article" style="background-color: white;">
+            <view hidden="{{!showSke}}" class="bg-white" style="border-radius: 5px; margin: 0px;">
+                <import src="../../index3/index3.skeleton.wxml"/>
+                <template is="skeleton"/>
+            </view>
+            <view capture-bind:tap="shopItemClick" data-index="{{index}}" wx:for="{{showDataList}}" wx:for-item="info" wx:key="{{index}}" class="cu-item shadow" style="height: 160px;margin-bottom: 0px;margin-top: 0px;margin-right: 0px;">
+                <view class="content" style="padding-top: 10px;height: 100%;padding-left: 0px;">
+                    <image src="{{info.img}}" style="height: 100%;width: 170px;" mode="aspectFill"></image>
+                    <view class="" style="width: 100%;">
+                        <view style="font-size: 18px;">
+                            <text style="float: left;margin-left: 4px;color: black;line-height: 22px;min-height: 45px;" class="text_small">{{info.title}}</text>
+                        </view>
+                        <view style="clear: both;margin-top: 30px;">
+                            <view>
+                                <view style="float: left; text-align: center; background-image: url('https://www.ifaceai.com/img/coupon.png');background-repeat: repeat;background-size: 100% 100%;width: 80px;height: 25px;line-height: 25px;">
+                                    <text style="color: white;padding-left: 15px;font-size: 14px;">{{info.jMoney}}元</text>
+                                </view>
+                                <view style="clear: both;"></view>
+                            </view>
+                            <view style="height: 30px;line-height: 30px;padding-top: 0px;">
+                                <text style="color: red;font-size: 18px;">¥ </text>
+                                <text style="color: red;font-size: 20px;font-weight: bold;">{{info.money}}</text>
+                                <text style="color: #999;padding-left: 5px;font-size:14px;">原价¥{{info.oldMoney}}</text>
+                            </view>
+                            <view style="margin-top: 0px;">
+                                <view style="background-color: rgb(252, 210, 185); height:40px;line-height:40px;border-top-right-radius: 20px;border-bottom-right-radius: 20px;overflow: hidden;">
+                                    <text style="padding-left: 10px; color: rgba(53, 43, 24, 0.623);">近2小时疯抢</text><text class="text-orange" style="font-size: 16px;">{{info.hSCount}}</text><text style="color: red;">件</text>
+                                    <view style="float: right;height: 100%;width: 70px;text-align: center;" class="bg-red">立即抢</view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="cu-load load-icon {{!isLoad?'loading':'over'}}"></view>
+    </view>
+</view>

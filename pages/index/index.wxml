@@ -1,0 +1,159 @@
+<index-custom bind:titleClick="titleClick" bgColor="{{bgColor}}" isBack="{{false}}"></index-custom>
+<view class="{{bgColor}} conbg" style="height: {{CustomBar+100}}px;"> </view>
+<view class="con" style="position: absolute;top: {{CustomBar}}px;width: 100%;left: 0px;z-index: 5;">
+
+    
+    <swiper style="height: 140px;padding-top: 15px;" class="card-swiper round-dot" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500" bindchange="cardSwiper" indicator-color="#8799a3" indicator-active-color="#0081ff">
+        <swiper-item wx:for="{{swiperList}}" wx:key="index" class="{{cardCur==index?'cur':''}}">
+            <view data-index="{{index}}" capture-bind:tap="banItemClick" class="swiper-item" style="border-radius: 20px;padding: 0px;">
+                <image src="{{item.url}}" style="width: 100%;height: 100%;"></image>
+            </view>
+        </swiper-item>
+    </swiper> 
+    
+    <view style="background-color: white;font-size: 14px;padding-top: 10px;height: 370rpx;overflow: hidden;">
+        <swiper class="screen-swiper square-dot" indicator-color="#8799a3" indicator-active-color="#ff0000" style="min-height: 350rpx;">
+            <swiper-item style="background-color: white;"> 
+                <view class="grid col-5 text-center" style="height:150rpx;">
+                    <view capture-bind:tap="typeItemClick" style="margin-top: 10px;" class="" data-index="{{index}}" wx:for="{{list1}}" wx:for-item="info" wx:key="{{index}}">
+                        <image mode="aspectFit" style="width: auto;height: 40px;" src="{{info.url}}"></image>
+                        <text style="line-height: 30px;">{{info.title}}</text>
+                    </view>
+                </view>
+            </swiper-item>
+            <swiper-item style="background-color: white;">
+                <view class="grid col-5 text-center" style="height:150px;">
+                    <view capture-bind:tap="typeItemClick1" style="margin-top: 10px;" class="" data-index="{{index}}" wx:for="{{list2}}" wx:for-item="info" wx:key="{{index}}">
+                        <image mode="aspectFit" style="width: auto;height: 40px;" src="{{info.url}}"></image>
+                        <text style="line-height: 30px;">{{info.title}}</text>
+                    </view>
+                </view>
+            </swiper-item>
+        </swiper>
+    </view>
+    
+    <view style="background-color:#f1f1f1;text-align: center;padding-top: 5px;">
+        <view style="display: inline-block;">
+            <image capture-bind:tap="showModal" src="https://www.ifaceai.com/img/leftpic.png" mode="widthFix" style="float: left; width: 110px;"></image>
+            <image capture-bind:tap="openCsm" src="https://www.ifaceai.com/img/midpic.png" mode="widthFix" style="float: left;width: 110px;"></image>
+            <button open-type="share" class="cu-btn" style="width: auto;margin-top: 23px;padding: 0px;">
+                <image capture-bind:tap="openShare" src="https://www.ifaceai.com/img/rightpic.png" mode="widthFix" style="float: left;width: 110px;"></image>
+            </button>
+            <view style="clear: both;"></view>
+        </view>
+    </view>
+    <view style="clear: both;"></view>
+
+    
+    <view wx:if="{{accountLevel!=null&&accountLevel=='1'&&wxGzhUrl!=null}}" capture-bind:tap="openGzh" style="background-color: #f1f1f1;text-align: center;height: 90px; padding: 2px 10px 0px 10px;margin-top: 0px;margin-bottom: 15px;">
+        <image style="width: 100%;" mode="widthFix" src="https://www.ifaceai.com/img/gzh.png"></image>
+    </view>
+    
+    <view style="background-color: #f1f1f1;height:auto;padding: 0rpx 10px 0px 10px;">
+        <view wx:if="{{info.show}}" capture-bind:tap="btnClickHand" data-index="{{index}}" wx:for="{{btnList}}" wx:for-item="info" wx:key="{{index}}" style="background-repeat: no-repeat;background-size: 100% 100%;position: relative;  background-image: url('{{info.bgurl}}');height: 100px;margin-top: 0rpx;margin-bottom: 20rpx;">
+            <view style="margin-left: 100px;padding-top: 20px;">
+                <text style="font-size: 18px;">{{info.title}}</text>
+                <view style="font-size: 24px;font-weight: bold;color: red;margin-top: 8px;">{{info.money}}<text style="font-size:12px;font-weight:normal;">{{info.unit}}</text>
+                    <text style="border:1px solid red;font-size:12px;font-weight:normal;padding:0 5px 0 5px;border-radius: 5px;margin-left: 3px;">{{info.remark}}</text>
+                </view>
+            </view>
+            <view style="overflow: hidden; height: 30px;line-height: 30px;border-radius: 20px; text-align: center; width: 80px; position: absolute;top: 37px;right: 10px; background-color: red;color: white;font-size: 14px;" class="sitelogo">免费领取</view>
+        </view>
+    </view>
+    
+    <view style="background-color:#f1f1f1;">
+        <view style="text-align: center;height: auto; overflow: hidden;">
+            <image capture-bind:tap="openBybt" src="https://www.ifaceai.com/img/bybt.png" style="width: 100%;height: 100px;"></image>
+        </view>
+        <view class="grid col-2 text-center" style="height:200rpx;background-color: red;margin-top: -5px;">
+            <view style="padding:10px;">
+                <image capture-bind:tap="openSxms" src="https://www.ifaceai.com/img/pdd1.jpeg" style="height: 100%;"></image>
+            </view>
+            <view style="padding: 10px;">
+                <image capture-bind:tap="openMtyh" src="https://www.ifaceai.com/img/mtyx1.png" style="height: 100%;"></image>
+            </view>
+        </view>
+    </view>
+    
+    <view class="shoptitle" id="tab">  
+        <view class="grid col-{{shopTitleListLength}} text-center">
+            <view wx:if="{{info.show}}" bindtap="showTitleClick" data-index="{{index}}" wx:for="{{shopTitleList}}" wx:for-item="info" wx:key="{{index}}">
+                <view style="font-size: 20px;color:{{info.active?'red':'black'}}">{{info.title}}</view>
+                <text style="line-height: 30px;" class="{{info.active?'shopactive':'shopnormal'}}">{{info.remark}}</text>
+            </view>
+        </view>
+        <view>
+            <view class="cu-card article" style="background-color: #f1f1f1;">
+                <view hidden="{{showDataList.length>0}}" class="bg-white" style="border-radius: 5px; margin: 15px;">
+                    <import src="index.skeleton.wxml"/>
+                    <template is="skeleton"/>
+                </view>
+                <view capture-bind:tap="shopItemClick" data-index="{{index}}" wx:for="{{showDataList}}" wx:for-item="info" wx:key="{{index}}" class="cu-item shadow" style="padding-bottom: 10px;height: 150px;margin-bottom: 0px;margin-top: 10px;">
+                    <view class="content" style="padding-right: 0px; padding-top: 10px;height: 100%;padding-left: 10px;">
+                        <image src="{{info.img}}" style="height: 100%;width: 170px;" mode="aspectFill"></image>
+                        <view class="" style="width: 100%;">
+                            <view style="font-size: 18px;min-height: auto;height: 40px;line-height: 20px;" class="text_small">{{info.title}}</view>
+                            <view style="padding-top: 5px;">
+                                <image wx:if="{{info.type=='美团优选'}}" style="float: left; width: 18px;height: 18px;" src="https://www.ifaceai.com/img/mtyx.png"></image>
+                                <image wx:if="{{info.type=='拼多多'}}" style="float: left; width: 18px;height: 18px;" src="https://www.ifaceai.com/img/pdd2.png"></image>
+                                <image wx:if="{{info.type=='淘宝'}}" style="float: left; width: 18px;height: 18px;" src="https://www.ifaceai.com/img/tb.png"></image>
+                                <image wx:if="{{info.type=='京东'}}" style="float: left; width: 18px;height: 18px;" src="https://www.ifaceai.com/img/jd1.png"></image>
+                                <image wx:if="{{info.type=='抖音'}}" style="float: left; width: 18px;height: 18px;" src="https://www.ifaceai.com/img/douyin.png"></image>
+                                <text class="text_small_1" style="width: 70%; float: left;margin-left: 5px;">{{info.dName}}</text> 
+                            </view>
+                            <view style="clear: both;margin-top: 25px;">
+                                <view>
+                                    <text style="color: red;font-size: 18px;">¥ </text>
+                                    <text style="color: red;font-size: 20px;font-weight: bold;">{{info.money}}</text>
+                                    <text wx:if="{{info.money!=info.oldMoney}}" style="color: #999;padding-left: 5px;font-size:14px;">原价¥{{info.oldMoney}}</text>
+                                </view>
+                                <view style="margin-top: 12px;">
+                                    <view style="float: left; text-align: center; background-image: url('https://www.ifaceai.com/img/coupon.png');background-repeat: repeat;background-size: 100% 100%;width: 80px;height: 25px;line-height: 25px;">
+                                        <text style="color: white;padding-left: 15px;font-size: 14px;">{{info.jMoney}}</text>
+                                    </view>
+                                    <view wx:if="{{info.anceMoney!=null}}" style="text-align: center;font-size: 14px;border-radius: 5px;margin-left: 5px; color: red;line-height: 25px; float: left;background-color: #f1f1f1;width: auto;height: 25px;">
+                                        返¥{{info.anceMoney}}
+                                    </view>
+                                    <text wx:if="{{info.sCount!=null}}" style="padding-right: 5px; float: right;color: #999;line-height: 25px;font-size: 14px;">{{info.sCount}}</text>
+                                </view>
+                            </view> 
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="cu-load load-icon {{isLoad?'over':'loading'}}"></view>
+            <view hidden="{{!isLoad}}" style="text-align: center;color: #999;height: 50px;line-height: 50px;">-我是有底线的-</view>
+        </view>
+    </view>
+
+
+</view>
+
+
+<image hidden="{{!floorstatus}}" capture-bind:tap="goTop" src="https://www.ifaceai.com/img/23-25-19.png" style="width: 50px;position: fixed;bottom: 10px;right: 20px;z-index: 5;" mode="widthFix"></image>
+
+
+
+
+<view class="cu-modal {{modalName=='DialogModal2'?'show':''}}">
+    <view class="cu-dialog bg-white">
+        <view class="cu-bar bg-white justify-end">
+            <view class="content" style="width: 100%;text-align: left;position: relative;padding-left: 15px;">关注公众号接收以下消息</view>
+            <view class="action" bindtap="hideModal">
+                <text class="cuIcon-close text-red"></text>
+            </view>
+        </view>
+        <view>
+            <view class="cu-form-group" wx:for="{{noticeType}}">
+                <view class="title">
+                    <checkbox disabled="true" style="font-size: 14px;float: left;" class="round" checked="checked"></checkbox><text style="padding-left: 10px;float: left;padding-top: 2px;">{{item}}</text>
+                </view>
+            </view>
+        </view>
+        <view class="cu-bar bg-white" style="margin:0 20px 0 20px;">
+            <button capture-bind:tap="hideModal" class="cu-btn bg-grey" style="margin-right: 10px;height: 35px;">取消</button>
+            <button capture-bind:tap="openGzh" class="cu-btn bg-green button-hover" style="margin-left: 10px;height: 35px;">去关注</button>
+        </view>
+        <view style="text-align: center;color: #999;font-size: 14px;padding-bottom: 20px;padding-top: 5px;">如已关注，则无需再关注！</view>
+    </view>
+</view>

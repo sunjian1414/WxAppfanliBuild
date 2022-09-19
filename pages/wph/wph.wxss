@@ -1,0 +1,1 @@
+.con{background-color:transparent}.conbg{border-bottom-left-radius:50px;border-bottom-right-radius:50px;width:100%;position:fixed;left:0}.shopactive{background-color:red;color:#fff;border-radius:10px;padding:2px 10px}.shopnormal{color:#999}.shoptitle{background-color:#f1f1f1;height:75px;padding-top:10px}

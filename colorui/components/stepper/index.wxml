@@ -1,0 +1,5 @@
+<view class="cl-stepper" data-index="{{index}}">
+     <view class="cl-stepper__minus  {{disabled || min>=value?'cl-stepper__minus--disabled':''}}" bindtap="reduce"></view>
+     <input type="number" disabled="{{disabled}}" class="cl-stepper__input" bindblur="blur" value="{{value}}"></input>
+     <view class="cl-stepper__plus {{disabled || value>=max?'cl-stepper__minus--disabled':''}}" bindtap="plus"></view>
+</view>

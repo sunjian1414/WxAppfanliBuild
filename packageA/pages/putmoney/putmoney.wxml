@@ -1,0 +1,28 @@
+<normal-custom bgColor="bg-white" isBack="{{true}}">
+  <view slot="content">提现确认</view>
+</normal-custom>
+<view style="background-color: white;width: 100%; margin-left: 10px; margin-right: 10px; margin-top: {{CustomBar+10}}px;">
+  <view style="padding: 10px;color: #999;font-size: 14px;">可提现总金额</view>
+  <view style="border-bottom: 1px solid #cccccc;margin:10px 10px 0 10px;font-size: 40px;line-height: 60px;">
+    <view wx:if="{{money!=null}}">
+      <text style="font-size: 30px;padding-left: 5px;">¥</text><text style="padding-left: 5px;">{{money}}</text>    
+    </view>
+    <view wx:if="{{money==null}}">
+      <view style="display: inline;font-size: 16px;" class="cu-load loading"></view>
+    </view>
+  </view>
+  <view class="cu-list menu">
+    <view class="cu-item arrow" style="min-height: 40px;padding-left: 10px;">
+      <view class="content">
+        <text class="text-grey" style="font-size: 16px;">提至微信余额</text>
+      </view>
+    </view>
+  </view>
+</view>  
+
+<view style="text-align: center;padding-top: 0px;margin-top: 20px;margin-left: 20px;margin-right: 20px;">
+  <button bindtap="payHand" style="background-color: {{money!=null?'#fa3b80':'#cccccc'}};width: 100%;color: white;" class="cu-btn margin-tb-sm lg">确认提现</button>
+</view>
+<view style="text-align: center;color: #999;">
+    🔰提现会前往‘素颜照’收银台进行,请放心提现
+</view>

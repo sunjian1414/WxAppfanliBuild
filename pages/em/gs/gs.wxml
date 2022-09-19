@@ -1,0 +1,72 @@
+<white-custom bgColor="bg-green" isBack="{{true}}">
+    <view slot="content" style="color: white;">饿了么果蔬</view>
+</white-custom>
+<image src="https://www.ifaceai.com/img/banner-ele-gs.png" style="width: 100%;margin-top: {{CustomBar}}px;" mode="widthFix"></image>
+<view style="padding: 0px 10px;">
+    <view class="bg-white" style="text-align: center;border-radius: 10px;">
+        <view style="display: inline-block;margin-top: 20px;margin-bottom: 10px;">
+            <view style="float: left;">
+                <image src="https://www.ifaceai.com/img/gs-3.png" style="width: 50px;" mode="widthFix"></image>
+                <view style="text-align: center;font-size: 16px;">先领券</view>
+            </view>
+            <image src="https://www.ifaceai.com/img/gs-4.png" style="float: left;width: 20px;margin-top: 15px;margin-left: 10px;margin-right: 10px;" mode="widthFix"></image>
+            <view style="float: left;">
+                <image src="https://www.ifaceai.com/img/gs-2.png" style="width: 50px;" mode="widthFix"></image>
+                <view style="text-align: center;font-size: 16px;">再下单</view>
+            </view>
+            <image src="https://www.ifaceai.com/img/gs-4.png" style="float: left;width: 20px;margin-top: 15px;margin-left: 10px;margin-right: 10px;" mode="widthFix"></image>
+            <view style="float: left;">
+                <image src="https://www.ifaceai.com/img/gs-1.png" style="width: 50px;" mode="widthFix"></image>
+                <view style="text-align: center;font-size: 16px;">拿返利</view>
+            </view>
+            <view style="clear: both;"></view>
+        </view>
+        <view style="border-top:2px dashed #4cdca9;padding-bottom: 20px;border-bottom-left-radius: 10px;" class="bg-white">
+            <view wx:if="{{img==null}}" style="text-align: center;height: 150px;line-height: 150px;">
+                <text style="font-size: 40px;" class="cuIcon-loading2 iconfont-spin"></text>
+            </view>
+
+            <image wx:if="{{img!=null}}" src="{{img}}" style="width: 50%;margin-top: 20px;" mode="widthFix"></image>
+            <button capture-bind:tap="openPath" wx:if="{{path!=null}}" style="background-color: #4cdca9;color: white; width: 70%; height: 50px;line-height: 50px;font-size: 20px;margin-top: 20px;" class="cu-btn round button-hover">
+                领红包买果蔬<text style="color: white;font-size: 10px;border-radius: 20px;background-color: rgb(250, 102, 85);height: 20px;padding: 0 10px 0 10px;margin-left: 5px; line-height: 20px;">1小时送达</text></button>
+        </view>
+
+    </view>
+</view>
+<view style="padding: 10px;margin-top: 10px;">
+    <view class="grid col-2">
+        <view style="text-align: right;padding-right: 10px;">
+            <button capture-bind:tap="openShare" style="height: 40px;width: 90%;font-size: 16px;background-color: orange;color: white;" class="cu-btn">分享好友</button>
+        </view>
+        <view style="text-align: left;padding-left: 10px;">
+            <button capture-bind:tap="openH5Link" style="width: 90%; height: 40px; color: green;font-size: 16px;" class="bg-white cu-btn">复制文案</button>
+        </view>
+    </view>
+</view>
+<view style="padding: 20px;color: white;font-size: 14px;line-height: 25px;">
+    <view style="font-size: 16px;">注意事项：</view>
+    <view>1.无论饿了么新老用户，每个手机号每天可领一次，红包金额随机发放;</view>
+    <view>2.饿了么绑定的手机号,需与领券登录的手机号一致;</view>
+    <view>3.下单后15分钟内会有订单提醒;</view>
+</view>
+
+
+
+<view class="cu-modal {{modalName=='DialogModal1'?'show':''}}">
+  <view class="cu-dialog"> 
+    <view class="sw" style="width: 350px;height: 540px;display: {{modalName=='DialogModal1'?'block':'none'}};">
+      <canvas style="width: 100%; height: 100%;" canvas-id="firstCanvas"></canvas>
+    </view>
+    <view class="cu-bar bg-white justify-end" style="text-align: center;">
+      <view class="grid col-2" style="width: 100%;margin-left: 10px;margin-right: 10px;">
+        <view style="padding-right: 5px;">
+          <button class="cu-btn bg-gray" bindtap="hideModal" style="font-weight: normal; width: 100%; height: 40px;line-height: 40px;">关闭</button>
+        </view>
+        <view style="padding-left: 5px;">
+          <button class="cu-btn bg-green text-white" bindtap="saveImage" style="width: 100%; height: 40px;line-height: 40px;">保存相册</button>
+        </view>
+      </view>
+
+    </view>
+  </view>
+</view>

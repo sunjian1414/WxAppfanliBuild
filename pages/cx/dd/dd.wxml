@@ -1,0 +1,83 @@
+<ui-custom bgColor="bg-orange" isBack="{{true}}">
+    <view slot="content" style="color: white;">滴滴出行</view>
+</ui-custom>
+<image src="https://www.ifaceai.com/img/ddcx_bg.jpg" style="width: 100%;" mode="widthFix"></image>
+<view style="padding: 0px 10px;">
+    <view class="bg-white" style="text-align: center;border-radius: 10px;">
+        <view style="display: inline-block;margin-top: 20px;margin-bottom: 10px;">
+            <view style="float: left;">
+                <image src="https://www.ifaceai.com/img/23-27-24.png" style="width: 50px;" mode="widthFix"></image>
+                <view style="text-align: center;font-size: 16px;">先领券</view>
+            </view>
+            <image src="https://www.ifaceai.com/img/9.png" style="float: left;width: 20px;margin-top: 15px;margin-left: 10px;margin-right: 10px;" mode="widthFix"></image>
+            <view style="float: left;">
+                <image src="https://www.ifaceai.com/img/23-27-29.png" style="width: 50px;" mode="widthFix"></image>
+                <view style="text-align: center;font-size: 16px;">再打车</view>
+            </view>
+            <image src="https://www.ifaceai.com/img/9.png" style="float: left;width: 20px;margin-top: 15px;margin-left: 10px;margin-right: 10px;" mode="widthFix"></image>
+            <view style="float: left;">
+                <image src="https://www.ifaceai.com/img/23-27-32.png" style="width: 50px;" mode="widthFix"></image>
+                <view style="text-align: center;font-size: 16px;">享优惠</view>
+            </view>
+            <view style="clear: both;"></view>
+        </view>
+        <view style="border-top:2px dashed #fbbd08;padding-bottom: 20px;border-bottom-left-radius: 10px;height: 288px;" class="bg-white">
+            <view wx:if="{{img==null}}" style="text-align: center;height: 270px;line-height: 270px;">
+                <text style="font-size: 40px;" class="cuIcon-loading2 iconfont-spin"></text>
+            </view>
+            <view wx:if="{{img!=null}}" style="text-align: center;">
+                <image src="{{img}}" style="width: 50%;margin-top: 20px;" mode="widthFix"></image>
+            </view>
+            <button wx:if="{{path!=null}}" capture-bind:tap="openPath" style="height: 45px;line-height: 45px;font-size: 20px;margin-top: 0px;" class="cu-btn round bg-orange button-hover">领券打车
+                <text style="color: #fb7119;font-size: 10px;border-radius: 20px;background-color: white;height: 20px;padding: 0 10px 0 10px;margin-left: 5px; line-height: 20px;">单单省钱</text>
+            </button>
+        </view>
+    </view>
+</view>
+<view style="padding: 10px;margin-top: 10px;">
+    <view class="grid col-2">
+        <view style="text-align: right;padding-right: 10px;">
+            <button capture-bind:tap="openShare" style="height: 40px;width: 90%;font-size: 16px;" class="bg-red cu-btn">分享赚钱</button>
+        </view>
+        <view style="text-align: left;padding-left: 10px;">
+            <button capture-bind:tap="openH5Link" style="width: 90%; height: 40px; color: green;font-size: 16px;" class="bg-white cu-btn">
+                复制链接</button>
+        </view>
+    </view>
+</view>
+<view style="padding: 10px;">
+    <view class="grid col-2" style="margin-top: 10px;">
+        <view style="text-align: left;">
+            <image capture-bind:tap="openTypeHand" data-type="0" style="width: 95%;" mode="widthFix" src="https://www.ifaceai.com/img/didihy.png"></image>
+        </view>
+        <view style="text-align: right;">
+            <image capture-bind:tap="openTypeHand" data-type="1" style="width: 95%;" mode="widthFix" src="https://www.ifaceai.com/img/didijy.png"></image>
+        </view>
+    </view>
+</view>
+<view style="padding: 20px;color: white;font-size: 14px;line-height: 25px;">
+    <view style="font-size: 16px;">注意事项：</view>
+    <view>1.领券后请在红包有效期内下单;</view>
+    <view>2.滴滴绑定的手机号,需与领券登录的手机号一致;</view>
+    <view>3.无论滴滴新老用户,红包金额随机发放;</view>
+</view>
+
+
+<view class="cu-modal {{modalName=='DialogModal1'?'show':''}}">
+    <view class="cu-dialog">
+        <view class="sw" style="width: 350px;height: 540px;">
+            <canvas style="width: 100%; height: 100%;" canvas-id="firstCanvas"></canvas>
+        </view>
+        <view class="cu-bar bg-white justify-end" style="text-align: center;">
+            <view class="grid col-2" style="width: 100%;margin-left: 10px;margin-right: 10px;">
+                <view style="padding-right: 5px;">
+                    <button class="cu-btn bg-gray" bindtap="hideModal" style="font-weight: normal; width: 100%; height: 40px;line-height: 40px;">关闭</button>
+                </view>
+                <view style="padding-left: 5px;">
+                    <button class="cu-btn bg-green text-white" bindtap="saveImage" style="width: 100%; height: 40px;line-height: 40px;">保存相册</button>
+                </view>
+            </view>
+
+        </view>
+    </view>
+</view>

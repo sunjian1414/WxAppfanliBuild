@@ -1,0 +1,61 @@
+<ui-custom bgColor="bg-white" isBack="{{true}}">
+    <view slot="content">提现记录</view>
+</ui-custom>
+<view class="cu-list sm-border menu-avatar">
+    <view wx:if="{{showTip}}" style="text-align: center;color: #999;padding-top: 30px;">暂无提现记录</view>
+    <view class="cu-item" data-index="{{index}}" wx:for="{{list}}" wx:for-item="item" wx:key="{{index}}">
+        <view class="cu-avatar" style="background-color: transparent;">
+            <image wx:if="{{item.audit_status==0}}" src="https://www.ifaceai.com/img/wxlq.png" style="width: 30px;" mode="widthFix"></image>
+            <image wx:if="{{item.audit_status==1}}" src="https://www.ifaceai.com/img/wxsp.png" style="width: 30px;" mode="widthFix"></image>
+            <image wx:if="{{item.audit_status==2}}" src="https://www.ifaceai.com/img/tui.png" style="width: 30px;" mode="widthFix"></image>
+            <image wx:if="{{item.audit_status==3}}" src="https://www.ifaceai.com/img/jinyong.png" style="width: 30px;" mode="widthFix"></image>
+        </view>
+        <view class="content" style="left: 60px;border-bottom: 1px solid #f1f1f1;">
+            <block wx:if="{{item.audit_status==0}}">
+                <view class="text-grey">已提现</view>
+                <view class="text-gray text-sm flex">
+                    {{item.create_date}}
+                </view>
+            </block>
+            <block wx:if="{{item.audit_status==1}}">
+                <view class="text-grey">
+                    <text style="color: #fa3b80;">审批中</text><text style="color: orange;">【{{item.todate}}】</text>
+                </view>
+                <view class="text-gray text-sm flex">
+                    {{item.create_date}}
+                </view>
+            </block>
+            <block wx:if="{{item.audit_status==2}}">
+                <view class="text-grey">
+                    <text style="color: orange;">商品退货【需扣除{{item.tk_money}}元】</text>
+                </view>
+                <view class="text-gray text-sm flex">
+                    提现终止【原申请提现{{item.money}}元】
+                </view>
+            </block>
+            <block wx:if="{{item.audit_status==3}}">
+                <view class="text-grey">
+                    <text style="color: orange;">商品退货</text>
+                </view>
+                <view class="text-gray text-sm flex">
+                    提现终止【原申请提现{{item.money}}元】
+                </view>
+            </block>
+        </view>
+        <view class="action" style="font-size: 20px;width: auto;">
+            <block wx:if="{{item.audit_status==0}}">
+                <text style="color:  #12c161;">+{{item.money}}</text>
+            </block>
+            <block wx:if="{{item.audit_status==1}}">
+                <text style="color:  #12c161;">+{{item.money}}</text>
+            </block>
+            <block wx:if="{{item.audit_status==2}}">
+                <button capture-bind:tap="tkHand" class="cu-btn round bg-green shadow" style="width: 95px;">退回余额</button>
+            </block>
+            <block wx:if="{{item.audit_status==3}}">
+                <text style="color:  red;">-{{item.tk_money}}</text>
+            </block>
+        </view>
+    </view>
+    <view style="text-align: center;color: #999;padding-top: 10px;padding-bottom: 40px;" wx:if="{{showBottom}}">-我是有底线的-</view>
+</view>

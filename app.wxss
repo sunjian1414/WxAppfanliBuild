@@ -1,0 +1,22 @@
+@import "colorui/main.wxss";
+@import "colorui/icon.wxss";
+
+
+
+.text_small_1 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    line-height: 15px;
+}
+
+.text_small {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    line-height: 32px;
+    min-height: 60px;
+    font-size: 18px;
+}

@@ -1,0 +1,48 @@
+<ui-custom bgColor="bg-white" isBack="{{true}}">
+    <view slot="content">我的好友</view>
+</ui-custom>
+<view style="height: 30px;line-height: 30px;">
+    <image src="https://www.ifaceai.com/img/yaoqing.png" style="margin-left: 10px; width: 30px;float: left;" mode="widthFix"></image>
+    <text style="float: left;padding-top: 2px;padding-left: 5px;">您共邀请了{{count}}人</text>
+    <text capture-bind:tap="showDesc" class="text-blue" style="float: right;text-decoration: underline;padding-right: 10px;">状态说明</text>
+</view>
+<view class="cu-list menu-avatar" style="clear: both;">
+    <view class="cu-item" wx:for="{{list}}" wx:key="index">
+        <view class="cu-avatar round lg" style="background-image:url({{item.logo}});"></view>
+        <view class="content">
+            <view class="text-grey">{{item.yname}}</view>
+            <view class="text-gray text-sm flex">
+                <text style="background-color:{{item.state?'#0BB20C':'#ffb048'}};font-size: 14px;color: white;padding: 0 7px 0 7px;-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;">{{item.state?'已下单':'未下单'}}</text>
+                <text wx:if="{{item.f_position_id==null}}" style="margin-left: 5px; background-color: #cccccc;font-size: 14px;color: white;padding: 0 7px 0 7px;-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;">未激活</text>
+            </view>
+        </view>
+        <view class="action">
+            <view class="text-grey text-xs">{{item.create_date}}</view>
+        </view>
+    </view>
+</view>
+<view wx:if="{{showPreloader}}" class="cu-load load-icon loading"></view>
+<view wx:if="{{!showPreloader}}" style="text-align:center;color:#999;">我是有底线的</view>
+
+
+<view class="cu-modal {{modalName=='Modal'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">状态说明</view>
+      <view class="action" bindtap="hideModal">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="bg-white" style="font-size: 20px;">
+      <view class="text-green" style="line-height: 40px;">
+        <text>●<text style="margin-left: 20px;">已下单【在平台有订单产生】</text></text>
+      </view>
+      <view class="text-orange" style="line-height: 40px;">
+        <text>●<text style="margin-left: 20px;">未下单【随便看了看,没订单】</text></text>
+      </view>
+      <view class="text-gray" style="line-height: 40px;">
+        <text>●<text style="margin-left: 20px;">未激活【仅仅是关注,无兴趣】</text></text>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,63 @@
+<ui-custom bgColor="bg-white" isBack="{{true}}">
+    <view slot="content">店铺详情</view>
+</ui-custom>
+<view style="padding:10px">
+    <view class="cu-list menu-avatar bg-white" style="padding: 10px;">
+        <view class="cu-item" style="height: 110px;">
+            <view class="content" style="left: 0px;">
+                <view class="text-grey" style="margin-top: 20px;">{{info.seckillShopDealInfoVO.shopName}}</view>
+                <view style="margin-top: 5px;">
+                    <star style="float: left;width: 100px;" key="{{info.seckillShopDealInfoVO.avgScore}}"></star>
+                    <text class="text-red" style="font-size: 14px;float: left;">{{info.seckillShopDealInfoVO.avgScore}}<text class="text-gray" style="padding-left: 4px;">{{info.seckillShopDealInfoVO.cateName}}</text> </text>
+                </view>
+                <view style="width: 100%;line-height: 22px;color: #999;margin-top: 5px;" class="text_small">{{info.seckillShopDealInfoVO.address}}</view>
+            </view>
+            <view class="action" style="width: auto;">
+                <image src="{{info.seckillShopDealInfoVO.dealList[0].imgUrl}}" style="height: 80px;" mode="heightFix"></image>
+            </view>
+        </view>
+    </view>
+    <view style="margin-top: 10px;padding: 10px;height: 160px;" class="bg-white">
+        <view style="font-weight: bold;font-size: 18px;">省钱步骤</view>
+        <view class="grid col-3" style="margin-top: 20px;">
+            <view style="text-align: center;">
+                <image src="https://www.ifaceai.com/img/3.png" style="width: 35px;" mode="widthFix"></image>
+                <view style="text-align: center;font-size: 14px;padding-top: 5px;">打开礼包领券</view>
+            </view>
+            <view style="text-align: center;">
+                <image src="https://www.ifaceai.com/img/4.png" style="width: 35px;" mode="widthFix"></image>
+                <view style="text-align: center;font-size: 14px;padding-top: 5px;">到店用券下单</view>
+            </view>
+            <view style="text-align: center;">
+                <image src="https://www.ifaceai.com/img/5.png" style="width: 35px;" mode="widthFix"></image>
+                <view style="text-align: center;font-size: 14px;padding-top: 5px;">消费后24小时同步订单返现</view>
+            </view>
+            <view style="clear: both;"></view>
+        </view>
+    </view>
+    <view style="line-height: 50px;">
+        <text class="bg-red text-white" style="padding: 5px;font-size: 16px;border-radius: 5px;">惠</text>
+        <text style="font-weight: bold;font-size: 20px;margin-left: 10px;">优惠列表</text>
+    </view>
+    <view class="cu-list menu-avatar bg-white">
+        <view capture-bind:tap="itemClick" class="cu-item" style="height: 120px;" wx:for="{{info.seckillShopDealInfoVO.dealList}}" wx:key="{{index}}" data-index="{{index}}">
+            <view class="cu-avatar bg-white" style="height: 100%;width: 110px;">
+                <image src="{{item.imgUrl}}" style="width: 110px;" mode="widthFix"></image>
+            </view>
+            <view class="content" style="left: 140px;height: 100%;">
+                <view class="text-black text_small" style="max-height: 50px;line-height: 20px; font-size: 16px;font-weight: bold;">{{item.title}}</view>
+                <view style="text-decoration: line-through;font-size: 14px;color: #999;">市场价{{item.marketPrice/100}}元</view>
+                <view class="text-red" style="font-size: 16px;">秒杀价 ¥ {{item.finalPrice/100}}元</view>
+            </view>
+            <view class="action" style="width: auto;">
+                <button style="max-width: 110px;padding-left: 0px;padding-right: 0px;font-size: 14px;" class="round cu-btn bg-red text-white">领券省{{(item.marketPrice-item.finalPrice)/100}}元</button>
+            </view>
+        </view>
+    </view>
+</view>
+<view style="padding-top: 10px; text-align: center;color: #999;">-我是有底线的-</view>
+
+<view style="position: fixed;bottom: 0px;left: 0px;width: 100%;z-index: 2;height: 50px;line-height: 50px;" class="bg-white">
+    <text class="cuIcon-locationfill lg text-red" style="margin-left: 20px;"></text><text style="padding-left: 4px;">距离 {{info.seckillShopDealInfoVO.distance}} km </text>
+    <button capture-bind:tap="openMap" style="float: right;margin-top: 8px;width: 120px;border-radius: 20px;margin-right: 10px;" class="cu-btn bg-blue dhbtn"><text class="cuIcon-forward lg text-white">开始导航</text></button>
+</view>

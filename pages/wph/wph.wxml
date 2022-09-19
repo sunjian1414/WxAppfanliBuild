@@ -1,0 +1,64 @@
+<title-custom bind:titleClick="titleClick" title="唯品会" bgColor="{{bgColor}}" isBack="{{false}}"></title-custom>
+<view class="{{bgColor}} conbg" style="height: {{CustomBar+100}}px;"> </view>
+
+<view class="con" style="position: absolute;top: {{CustomBar}}px;width: 100%;left: 0px;z-index: 5;">
+  
+  <swiper style="height: 140px;padding-top: 15px;" class="card-swiper round-dot" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500" bindchange="cardSwiper" indicator-color="#8799a3" indicator-active-color="#0081ff">
+    <swiper-item wx:for="{{swiperList}}" wx:key="index" class="{{cardCur==index?'cur':''}}">
+      <view data-index="{{index}}" capture-bind:tap="banItemClick" class="swiper-item" style="border-radius: 20px;padding: 0px;">
+        <image src="{{item.url}}" style="width: 100%;height: 100%;"></image>
+      </view>
+    </swiper-item>
+  </swiper>
+
+  
+  <view style="background-color: #f1f1f1;padding: 10px;">
+    <view class="grid col-2">
+      <view style="padding-right: 5px;">
+        <image src="https://www.ifaceai.com/img/ppqc.png" style="width:100%;height:80px;"></image>
+      </view>
+      <view style="padding-left: 5px;">
+        <image src="https://www.ifaceai.com/img/szfq.png" style="width:100%;height:80px;"></image>
+      </view>
+    </view>
+  </view>
+  
+  <scroll-view style="font-size: 16px;padding: 0px 10px 0 10px;" scroll-x class="nav" scroll-with-animation scroll-left="{{scrollLeft}}">
+    <view class="cu-item {{index==TabCur?'text-red cur':''}}" wx:for="{{typeList}}" wx:key bindtap="tabSelect" data-id="{{index}}">
+      {{item}}
+    </view>
+  </scroll-view>
+  
+  <view class="cu-card article" style="background-color: #f1f1f1;padding: 0px 10px;">
+    <view capture-bind:tap="shopItemClick" data-index="{{index}}" wx:for="{{showDataList}}" wx:for-item="info" wx:key="{{index}}" class="cu-item shadow" style="padding-bottom: 10px;height: 150px;margin:0 0 10px 0;">
+      <view class="content" style="padding-top: 10px;height: 100%;padding-left: 10px;">
+        <image src="{{info.img}}" style="height: 100%;width: 170px;" mode="aspectFill"></image>
+        <view class="" style="width: 100%;">
+          <view style="font-size: 18px;">{{info.title}}</view>
+          <view style="padding-top: 5px;">
+            <image style="float: left; width: 18px;height: 18px;" src="https://www.ifaceai.com/img/pdd_icon.png"></image>
+            <text style="float: left;margin-left: 5px;">{{info.name}}</text>
+          </view>
+          <view style="clear: both;margin-top: 40px;">
+            <view>
+              <text style="color: red;font-size: 18px;">¥ </text>
+              <text style="color: red;font-size: 20px;font-weight: bold;">{{info.money}}</text>
+              <text style="color: #999;padding-left: 5px;font-size:14px;">原价¥{{info.oldMoney}}</text>
+            </view>
+            <view style="margin-top: 12px;">
+              <view style="float: left; text-align: center; background-image: url('https://www.ifaceai.com/img/coupon.png');background-repeat: repeat;background-size: 100% 100%;width: 80px;height: 25px;line-height: 25px;">
+                <text style="color: white;padding-left: 15px;font-size: 14px;">{{info.jmoney}}元</text>
+              </view>
+              <view style="text-align: center;font-size: 14px;border-radius: 5px;margin-left: 5px; color: red;line-height: 25px; float: left;background-color: #f1f1f1;width: 50px;height: 25px;">
+                返¥{{info.ancemoney}}
+              </view>
+              <text style="float: right;color: #999;line-height: 25px;font-size: 14px;">已售{{info.xl}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="cu-load load-icon {{!isLoad?'loading':'over'}}"></view>
+  </view>
+
+</view>

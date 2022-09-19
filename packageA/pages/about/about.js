@@ -1,0 +1,1 @@
+/*Obfuscated by JShaman.com*/const app=getApp();var request=require('../../../utils/request.js');Page({'data':{'url':null},'onLoad'(_0x1557ce){this['setData']({'url':app['globalData']['apiInfo']['wxGzhUrl']});},'onReady'(){},'onShow'(){},'onHide'(){},'onUnload'(){},'onPullDownRefresh'(){},'onReachBottom'(){},'onShareAppMessage'(){}});

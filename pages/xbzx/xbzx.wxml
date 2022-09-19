@@ -1,0 +1,40 @@
+<white-custom bgColor="{{bgColor}}" isBack="{{true}}">
+    <view slot="content" style="color: white;">线报中心</view>
+</white-custom>
+<image style="width: 100%;margin-top: {{CustomBar}}px;" mode="widthFix" src="https://www.ifaceai.com/img/xbzx.png"></image>
+
+<scroll-view style="background-color: white; font-size: 16px;padding: 0px 10px 0 10px;" scroll-x class="nav" scroll-with-animation scroll-left="{{scrollLeft}}">
+    <view class="cu-item {{index==TabCur?'text-red cur':''}}" wx:for="{{typeList}}" wx:key bindtap="tabSelect" data-id="{{index}}" data-cid="{{item.tb_cid}}" data-tb_cid="{{item.tb_cid}}">
+        {{item.name}}
+    </view>
+</scroll-view>
+
+<view class="cu-card article" style="background-color: #f1f1f1;padding: 0px 10px;">
+    <view hidden="{{showDataList.length>0}}" class="bg-white" style="border-radius: 0px; margin: 0px;">
+        <import src="xbzx.skeleton.wxml"/>
+        <template is="skeleton"/>
+    </view>
+    <view capture-bind:tap="shopItemClick" data-index="{{index}}" wx:for="{{showDataList}}" wx:for-item="info" wx:key="{{index}}" class="cu-item shadow" style="padding-bottom: 10px;height: 150px;margin:0 0 10px 0;">
+        <view class="content" style="padding-top: 10px;height: 100%;padding-left: 10px;">
+            <image src="{{info.img}}" style="height: 100%;width: 170px;" mode="aspectFill"></image>
+            <view class="" style="width: 100%;">
+                <view style="font-size: 18px;">{{info.title}}</view>
+                <view style="clear: both;margin-top: 5px;">
+                    <view>
+                        <image style="float: left; width: 18px;height: 18px;" src="https://www.ifaceai.com/img/tb.png"></image>
+                        <text style="color: red;font-size: 18px;padding-left: 10px;">¥ </text>
+                        <text style="color: red;font-size: 20px;font-weight: bold;">{{info.money}}</text>
+                        <text style="color: #999;padding-left: 5px;font-size:14px;">原价¥{{info.oldMoney}}</text>
+                    </view>
+                </view>
+                <view style="clear: both;margin-top: 10px;">
+                    <view style="margin-top: 12px;">
+                        <text style="color: gray;">销量：{{info.sCount}}</text>
+                        <button class="cu-btn bg-orange" style="float: right; width: 100px;border-radius: 20px;">去抢购 ></button>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="cu-load load-icon {{!isLoad?'loading':'over'}}"></view>
+</view>

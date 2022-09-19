@@ -1,0 +1,77 @@
+<ui-custom bgColor="bg-white" isBack="{{true}}">
+    <view slot="content">兑换订单</view>
+</ui-custom>
+
+<view wx:if="{{showTip}}" style="text-align: center;color: #999;padding-top: 30px;">暂无订单记录</view>
+
+<view style="margin: 10px;" data-index="{{index}}" wx:for="{{showDataList}}" wx:key="{{index}}">
+    <view class="grid col-2 bg-white" style="padding: 10px;">
+        <view style="line-height: 28px;">
+            <image src="/static/images/logo.png" style="width: 25px;float: left;" mode="widthFix"></image>
+            <text style="float: left;margin-left: 5px;">{{item.create_date}}</text>
+        </view>
+        <view style="text-align: right;">
+            <image capture-bind:tap="openkefu" style="float: right; width: 20px;" src="https://www.ifaceai.com/img/kefulogo.png" mode="widthFix"></image>
+            <text style="float: right;margin-right: 10px;">
+                <block wx:if="{{item.cscore==null||item.cscore==''}}" style="color: orange;">{{item.state}}</block>
+                <block wx:if="{{item.cscore!=null&&item.cscore!=''}}">已中止(补分恢复)</block>
+            </text>
+        </view>
+    </view>
+    <view class="cu-list menu-avatar">
+        <view class="cu-item" style="background-color: #f1f1f1;">
+            <view class="cu-avatar" style="width: 70px;">
+                <image src="{{item.img}}" style="width: 70px;" mode="widthFix"></image>
+            </view>
+            <view class="content" style="left: 95px;">
+                <view class="text-grey">{{item.title}}</view>
+                <view class="text-gray text-sm flex">
+                    {{item.score}}分
+                </view>
+            </view>
+            <view class="action">
+                ×{{item.count}}
+            </view>
+        </view>
+    </view>
+    <view class="bg-white" style="padding: 10px;line-height: 37px;height: 60px;">
+        <view style="float: left;">
+            <block wx:if="{{item.pay_type==0}}">
+                合计：{{item.pay_score}}分
+            </block>
+            <block wx:elif="{{item.pay_type==1}}">
+                合计：{{item.pay_score}}元
+            </block>
+            
+        </view> 
+        <view>
+            <button wx:if="{{item.cscore!=null&&item.cscore!=''}}" data-index="{{index}}" capture-bind:tap="openConfirmPay" style="width: auto;float: right;margin-left: 4px;" class="cu-btn round bg-red">立即补{{item.cscore}}分</button>
+            <button data-index="{{index}}" capture-bind:tap="openWlInfo" style="width: 100px;float: right;" class="cu-btn round line-black button-hover">查看物流</button>
+        </view>
+    </view>
+</view>
+
+<view style="text-align: center;color: #999;padding-top: 10px;padding-bottom: 40px;" wx:if="{{showBottom}}">-我是有底线的-</view>
+<view class="cu-load load-icon {{!isLoad?'loading':'over'}}"></view>
+
+
+<view class="cu-modal bottom-modal {{modalName=='bottomModal'?'show':''}}">
+    <view class="cu-dialog">
+        <view class="cu-bar bg-white">
+            <view class="action text-blue" bindtap="hideModal"></view>
+            <view class="action text-black" style="text-align: center;width: 100%;">确认支付</view>
+            <view class="action text-gray" bindtap="hideModal">取消</view>
+        </view>
+        <view class="padding-xl bg-white">
+            <view style="font-size: 30px;font-weight: bold;text-align: center;">{{payscoreInfo.score}}积分</view>
+            <view><button style="width: auto;margin-top: 10px;" class="cu-btn round line-orange button-hover">邀请挣积分</button></view>
+            <view class="grid col-2" style="margin-top: 20px;">
+                <view style="text-align: left;">商品</view>
+                <view style="text-align: right;">{{payscoreInfo.title}}</view>
+            </view>
+            <view>
+                <button capture-bind:tap="payscoreHand" style="width: 100%; height: 40px;margin-top: 20px;border-radius: 5px;" class="cu-btn bg-red">立即支付(恢复订单)</button>
+            </view>
+        </view>
+    </view>
+</view>

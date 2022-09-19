@@ -1,0 +1,46 @@
+<ui-custom bgColor="bg-red" isBack="{{true}}">
+    <view slot="content">实时热销榜</view>
+</ui-custom>
+<view class="conbg bg-red" style="height:80px;text-align: center;">
+    <image src="https://www.ifaceai.com/img/jdxb.jpg" style="width: 90%;border-radius: 10px;" mode="widthFix"></image>
+</view>
+
+<view class="cu-card article" style="background-color: #ffffff;margin-top: 50px;">
+    <view hidden="{{!showSke}}" class="bg-white" style="border-radius: 5px; margin: 0px;">
+        <import src="/pages/index3/index3.skeleton.wxml"/>
+        <template is="skeleton"/>
+    </view>
+    <view capture-bind:tap="shopItemClick" data-index="{{index}}" wx:for="{{showDataList}}" wx:for-item="info" wx:key="{{index}}" class="cu-item shadow" style="padding-bottom: 10px;height: 150px;margin: 0 0 10px 0;">
+        <view class="content" style="padding-top: 10px;height: 100%;padding-left: 10px;">
+            <image src="{{info.img}}" style="height: 100%;width: 170px;" mode="aspectFill"></image>
+            <view class="" style="width: 100%;">
+                <view style="font-size: 18px;min-height: auto;height: 40px;line-height: 20px;" class="text_small">{{info.title}}</view>
+                <view style="padding-top: 5px;">
+                    <image wx:if="{{info.type=='美团优选'}}" style="float: left; width: 18px;height: 18px;" src="https://www.ifaceai.com/img/mtyx.png"></image>
+                    <image wx:if="{{info.type=='拼多多'}}" style="float: left; width: 18px;height: 18px;" src="https://www.ifaceai.com/img/pdd2.png"></image>
+                    <image wx:if="{{info.type=='淘宝'}}" style="float: left; width: 18px;height: 18px;" src="https://www.ifaceai.com/img/tb.png"></image>
+                    <image wx:if="{{info.type=='京东'}}" style="float: left; width: 18px;height: 18px;" src="https://www.ifaceai.com/img/jd1.png"></image>
+                    <text style="width: 70%; float: left;margin-left: 5px;">{{info.dName}}</text>
+                </view>
+                <view style="clear: both;margin-top: 25px;">
+                    <view>
+                        <text style="color: red;font-size: 18px;">¥ </text>
+                        <text style="color: red;font-size: 20px;font-weight: bold;">{{info.money}}</text>
+                        <text wx:if="{{info.money!=info.oldMoney}}" style="color: #999;padding-left: 5px;font-size:14px;">原价¥{{info.oldMoney}}</text>
+                    </view>
+                    <view style="margin-top: 12px;">
+                        <view style="float: left; text-align: center; background-image: url('https://www.ifaceai.com/img/coupon.png');background-repeat: repeat;background-size: 100% 100%;width: 80px;height: 25px;line-height: 25px;">
+                            <text style="color: white;padding-left: 15px;font-size: 14px;">{{info.jMoney}}</text>
+                        </view>
+                        <view wx:if="{{info.anceMoney!=null}}" style="text-align: center;font-size: 14px;border-radius: 5px;margin-left: 5px; color: red;line-height: 25px; float: left;background-color: #f1f1f1;width: auto;height: 25px;">
+                            返¥{{info.anceMoney}}
+                        </view>
+                        <text wx:if="{{info.sCount!=null}}" style="float: right;color: #999;line-height: 25px;font-size: 14px;">{{info.sCount}}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="cu-load load-icon {{!isLoad?'loading':'over'}}"></view>
+    <view class="bg-white" hidden="{{!showTip}}" style="padding-top: 50px; text-align: center;color: #999;">-我是有底线的-</view>
+</view>

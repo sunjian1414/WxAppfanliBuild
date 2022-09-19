@@ -1,0 +1,5 @@
+{
+    "usingComponents": {
+        "cl-stepper":"/colorui/components/stepper/index"
+    }
+}

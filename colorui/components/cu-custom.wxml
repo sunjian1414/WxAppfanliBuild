@@ -1,0 +1,77 @@
+<view class="cu-custom" style="height:{{CustomBar}}px" style="background-color: white;">
+  <view class="cu-bar fixed {{bgImage!=''?'none-bg text-white bg-img':''}} {{bgColor}}" style="height:{{CustomBar}}px;padding-top:{{CustomBar}}rpx;{{bgImage?'background-image:url(' + bgImage+')':''}}">
+    <view class="search-form round">
+      <text class="cuIcon-search"></text>
+      <input bind:tap="clickHand" type="text" disabled="true" placeholder="搜索商品标题，先领券再购买" confirm-type="search" bindinput="searchIcon"></input>
+    </view>
+  </view>
+  <!--
+  <view class="cu-bar fixed {{bgImage!=''?'none-bg text-white bg-img':''}} {{bgColor}}" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;{{bgImage?'background-image:url(' + bgImage+')':''}}">
+    <view class="action" bindtap="BackPage" wx:if="{{isBack}}">
+      <text class="cuIcon-back"></text>
+      <slot name="backText"></slot>
+    </view>
+    <view class="action border-custom"  wx:if="{{isCustom}}" style="width:{{Custom.width}}px;height:{{Custom.height}}px;margin-left:calc(750rpx - {{Custom.right}}px)">
+      <text class="cuIcon-back" bindtap="BackPage"></text>
+      <text class="cuIcon-homefill" bindtap="toHome"></text>
+    </view>
+    <view class="content" style="top:{{StatusBar}}px">
+      <slot name="content"></slot>
+    </view>
+    <slot name="right"></slot>
+  </view>
+  -->
+
+  <!--搜索面板 {{modalName=='Modal'?'show':''}}--> 
+  <view class="cu-modal {{modalName=='Modal'?'show':''}}" style="z-index: 100000;display: {{modalName==''||modalName==null?'none':''}};opacity:{{modalName==''||modalName==null?0:1}}">
+    <view class="cu-dialog" style="height: 460px;background-color: #f1f1f1;">
+      <view style="background-color: black; background-image: url('https://www.ifaceai.com/img/ad2.png');background-repeat: no-repeat;background-size: 100% 100%;height: 100px;padding: 10px;">
+        <view style="text-align: left; font-size: 22px;font-weight: bold;">优惠智能搜索
+          <image bind:tap="closeWin" src="https://www.ifaceai.com/img/closeicon.png" style="float: right;width: 35px;height: 35px;margin-top: -5px;"></image>
+        </view>
+        <view style="padding-top: 10px;">
+          <image style="width: 18px;height: 18px;float: left;" src="https://www.ifaceai.com/img/copyicon.png"></image>
+          <text style="float: left;padding-left: 5px;font-size: 14px;color: #ff564c;">复制商品标题/关键词/链接/口令</text>
+        </view>
+        <view style="clear: both;padding-top: 5px;">
+          <image style="width: 18px;height: 18px;float: left;" src="https://www.ifaceai.com/img/detail_copy.png"></image>
+          <text style="float: left;padding-left: 5px;font-size: 14px;color: #ff564c;">打开小程序粘贴搜索</text>
+        </view>
+      </view>
+      <view style="clear: both;width: 100%; height: 180px;background-color: white;">
+        <textarea maxlength="500" disabled="{{showLoad}}" model:value="{{keyword}}" placeholder="请输入或粘贴商标标题/关键词/链接口令" style="font-size: 16px;width: 100%;text-align: left;padding: 10px;background-color: {{showLoad?'#f1f1f1':'white'}};"></textarea>
+        <view style="text-align: right;padding-right: 10px;background-color: {{showLoad?'#f1f1f1':'white'}};">
+          <view style="display: inline-block;" bind:tap="clearKeyword">
+            <text style="float: right; color: #ff564c;font-size: 16px;padding-left: 2px;">清空内容</text>
+            <image style="float: right; width: 16px;height: 16px;margin-top: 2px;" src="https://www.ifaceai.com/img/round_close.png"></image>
+            <view style="clear: both;"></view>
+          </view>
+        </view>
+      </view>
+      <view style="background-color: #f1f1f1;padding-top: 20px;">
+        <button capture-bind:tap="searchHand" class="cu-btn round" style="font-size: 16px; height: 42px;line-height: 42px; width: 90%; background-color: {{showLoad?'#f0463d':'#f0463d'}};color: white;">
+            <text style="font-size: 20px;margin-right: 5px;" wx:if="{{showLoad}}" class="cuIcon-loading2 iconfont-spin"></text> 
+        {{btnTxt}}</button>
+        <view class="grid col-{{tabCount}} text-center" style="width: 100%;margin-top: 10px;">
+          <view>
+            <image src="https://www.ifaceai.com/img/pdd1.png" style="width: 60px;height: 60px;"></image>
+            <view>拼多多</view>
+          </view>
+          <view wx:if="{{showTb==0}}">
+            <image src="https://www.ifaceai.com/img/order_tb.png" style="width: 60px;height: 60px;"></image>
+            <view>淘宝/天猫</view>
+          </view>
+          <view>
+            <image src="https://www.ifaceai.com/img/search_jd.png" style="width: 60px;height: 60px;"></image>
+            <view>京东</view>
+          </view>       
+          <view style="padding-top: 15px;" wx:if="{{showDy==0}}">
+            <image src="https://www.ifaceai.com/img/douyin.png" style="width: 45px;height: 45px;"></image>
+            <view>抖音</view>
+          </view>                  
+        </view>
+      </view>
+    </view>
+  </view>
+
+</view>

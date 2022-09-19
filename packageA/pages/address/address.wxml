@@ -1,0 +1,30 @@
+<ui-custom bgColor="bg-red" isBack="{{true}}">
+    <view slot="content">选择收货地址</view>
+</ui-custom>
+<view class="cu-list menu">
+    <view capture-bind:tap="itemClick" class="cu-item" data-index="{{index}}" wx:for="{{list}}" wx:for-item="item" wx:key="{{index}}">
+        <view class="content padding-tb-sm">
+            <view>
+                {{item._userName}} <text style="padding-left: 20px;">{{item._telNumber}}</text>
+            </view>
+            <view class="text-gray text-sm">
+                {{item._provinceName}} {{item._cityName}} {{item._countryName}} {{item._detailInfo}}
+            </view>
+        </view>
+        <view class="action">
+            <text wx:if="{{item.checked}}" style="font-size: 25px;" class="cuIcon-roundcheckfill lg text-green"></text>
+        </view>
+    </view>
+</view>
+
+<view wx:if="{{isLoad==true&&list.length<=0}}" style="text-align: center;color: #999;margin-top: 30px;">
+    -无收货地址-
+</view>
+
+<view wx:if="{{isLoad==false}}" style="margin-top: 30px;">
+    <view class="cu-load load-icon loading"></view>
+</view>
+
+<view style="padding-left: 10px;padding-right: 10px; position: fixed;bottom: 0px;left: 0px;width: 100%;height: 80px;z-index: 2;" class="bg-white">
+    <button capture-bind:tap="openWxAddress" style="width: 100%;" class="cu-btn bg-red margin-tb-sm lg button-hover">添加新地址</button>
+</view>

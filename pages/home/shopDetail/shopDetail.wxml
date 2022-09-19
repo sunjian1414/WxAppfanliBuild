@@ -1,0 +1,110 @@
+<back-custom></back-custom>
+<view>
+    <swiper class="screen-swiper square-dot" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500" style="min-height: 500rpx;">
+        <swiper-item wx:for="{{swiperList}}" wx:key="{{index}}" data-index="{{index}}" bind:tap="itemImgClick">
+            <image src="{{item.url}}" mode="aspectFill"></image>
+        </swiper-item>
+    </swiper>
+    <view style="background-color: #f1f1f1;">
+        
+        <view style="background-color: white;padding: 10px 10px 0 10px;">
+            <view class="grid col-2">
+                <view style="color: red;">
+                    ¥<text style="font-size: 20px;padding-left: 5px;">{{info.oldPrice}}</text>
+                    <text style="margin-left: 10px; padding: 2px 10px 2px 10px; font-size: 12px; border-radius: 20px;background-color: rgb(241, 214, 214);">优惠价</text>
+                </view>
+                <view style="text-align: right;">
+                    <view style="padding-top: 5px;"><text style="color: #ccc;">销量 {{info.count}}</text></view>
+                </view>
+            </view>
+        </view>
+        
+        <view style="padding:10px;background-color: white;">
+            <view style="font-size: 16px;">
+                <text style="line-height: 25px;padding-left: 5px;">{{info.content}}</text>
+            </view>
+        </view>
+        
+        <view style="background-color:white;padding:10px;">
+            <text style="font-size: 16px;">推荐理由：</text>
+            <text>{{info.shopDesc}}</text>
+        </view>
+        <view style="text-align: center;color: #999;padding:15px">
+            -宝贝详情-
+        </view>
+        <view>
+            <image wx:for-item="item" wx:key="{{index}}" wx:for="{{info.imgList}}" src="{{item}}" mode="widthFix" style="width: 100%;"></image>
+        </view>
+        <view style="height:60px;"></view>
+    </view>
+    
+    <view style="position: fixed;padding-bottom: 10px; bottom: 0px;left: 0px;height: 70px;width: 100%;border-top: 1px solid #999;background-color: white;z-index: 99;">
+        <view class="grid col-2" style="width: 100px;padding-left: 10px;float: left;padding-top: 7px;">
+        </view>
+        <view style="float: right;">
+            <view class="grid col-3" style="border-radius: 20px; width: 250px;overflow: hidden;height: 45px; margin-top: 7px;margin-right: 10px;">
+                <view class="bg-car" capture-bind:tap="addShopCar" style="line-height: 45px; text-align: center;color: white;">
+                    <view>添加购物车</view>
+                </view>
+                <view class="bg-orange" capture-bind:tap="goScore" style="line-height: 45px; text-align: center;color: white;">
+                    <view>积分兑换</view>
+                </view>
+                <view capture-bind:tap="goMoney" class="bg-red" style="line-height: 45px; text-align: center;color: white;">
+                    <view>支付购买</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+
+
+<view class="cu-modal bottom-modal {{modalName=='bottomModalScore'?'show':''}}">
+    <view class="cu-dialog">
+        <view class="cu-bar bg-white">
+            <view class="action text-green"></view>
+            <view class="action text-black" style="font-size: 20px;" bindtap="hideModal">X</view>
+        </view>
+        <view class="bg-white" style="padding: 0 10px 10px 10px;">
+            <view>
+                <view class="text-left">支付方式【{{payType==0?'积分支付':'现金支付'}}】</view>
+                <view class="text-left">
+                    <text capture-bind:tap="goScore" style="margin-top: 10px; display: inline-block;padding: 2px 20px 2px 20px;font-size: 16px; color:{{payType==0?'white':'#cb605c'}};background-color: {{payType==0?'#cb605c':'#fdedee'}};border:1px solid #cb605c;border-radius: 20px;">{{info.score}}积分</text>
+                    <text capture-bind:tap="goMoney" style="margin-left: 10px; margin-top: 10px; display: inline-block;padding: 2px 20px 2px 20px;font-size: 16px; color: {{payType==1?'white':'#cb605c'}};background-color: {{payType==1?'#cb605c':'#fdedee'}};border:1px solid #cb605c;border-radius: 20px;">{{info.price}}元</text>
+                </view>
+            </view>
+            <view class="grid col-2" style="margin-top: 20px;">
+                <view class="text-left">数量：</view>
+                <view class="text-right">
+                    <text class="text-red">不限购</text>
+                    <text data-type="0" capture-bind:tap="changeNumber" style="margin-left: 20px;font-size: 26px;" class="cuIcon-roundclose lg text-green"></text>
+                    <input model:value="{{payCount}}" style="text-align: center; margin-left: 5px; width: 40px;display: inline-block;" class="bg-gray" type="number"/>
+                    <text data-type="1" capture-bind:tap="changeNumber" style="font-size: 26px;margin-left: 5px;" class="cuIcon-roundaddfill roundclose lg text-green"></text>
+                </view>
+            </view>
+            <view style="margin-top: 20px;" class="cu-list menu text-left solid-top solid-bottom">
+                <view capture-bind:tap="openAddress" class="cu-item arrow" style="padding-left: 0px;">
+                    <view class="content">
+                        <text class="cuIcon-locationfill lg text-red"></text>
+                        <block wx:if="{{showLoadingAddress}}">
+                            <text style="display: inline;" class="cu-load load-icon loading"></text>
+                        </block>
+                        <block wx:elif="{{addressId==null}}">
+                            <text class="text-grey">请选择收货地址</text>
+                        </block>
+                        <block wx:else>
+                            <text class="text-grey">{{addressTxt}}</text>
+                        </block>
+                    </view>
+                    <view class="action">
+                    </view>
+                </view>
+            </view>
+            <view class="text-left" style="padding-top: 20px;">
+                <text class="text-red">*</text><text>提示：积分兑换类商品一经兑换，概不接受退货退积分，请用户谨慎兑换。</text>
+            </view>
+        </view>
+        <view>
+            <button capture-bind:tap="submitHand" style="width: 100%;border-radius: 0px;height: 45px;font-size: 18px;" class="cu-btn bg-red">确定</button>
+        </view>
+    </view>
+</view>

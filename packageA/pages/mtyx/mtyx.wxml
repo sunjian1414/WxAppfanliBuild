@@ -1,0 +1,57 @@
+<white-custom bgColor="{{bgColor}}" isBack="{{true}}">
+  <view slot="content" style="color: white;">美团优选</view>
+</white-custom>
+<view class="{{bgColor}} conbg" style="height: {{CustomBar+100}}px;"> </view>
+
+<view class="con" style="position: absolute;top: {{CustomBar}}px;width: 100%;left: 0px;z-index: 5;">
+  
+  <swiper style="height: 140px;padding-top: 15px;" class="card-swiper round-dot" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500" bindchange="cardSwiper" indicator-color="#8799a3" indicator-active-color="#0081ff">
+    <swiper-item wx:for="{{swiperList}}" wx:key="index" class="{{cardCur==index?'cur':''}}">
+      <view data-index="{{index}}" capture-bind:tap="banItemClick" class="swiper-item" style="border-radius: 20px;padding: 0px;">
+        <image src="{{item.url}}" style="width: 100%;height: 100%;"></image>
+      </view>
+    </swiper-item>
+  </swiper>
+  <view class="grid col-2" style="padding: 10px 10px 0 10px;">
+    <view style="padding-right: 5px;">
+      <image data-type="0" capture-bind:tap="openTypeHand" src="https://www.ifaceai.com/img/mtyx2.png" mode="widthFix"></image>
+    </view>
+    <view style="padding-left: 5px;">
+      <image data-type="1" capture-bind:tap="openTypeHand" src="https://www.ifaceai.com/img/mtyx3.png" mode="widthFix"></image>
+    </view>
+  </view>
+
+  <scroll-view style="background-color: #f1f1f1; font-size: 16px;margin-top: 0px;padding:0 10px 0 10px;" scroll-x class="nav" scroll-with-animation scroll-left="{{scrollLeft}}">
+    <view class="cu-item {{index==TabCur?'text-red cur':''}}" wx:for="{{typeList}}" wx:key bindtap="tabSelect" data-id="{{index}}">
+      {{item}}
+    </view>
+  </scroll-view> 
+
+  <view class="cu-card article" style="background-color: #f1f1f1;">
+    <view capture-bind:tap="shopItemClick" data-index="{{index}}" wx:for="{{showDataList}}" wx:for-item="info" wx:key="{{index}}" class="cu-item shadow" style="padding-bottom: 10px;height: 150px;margin-bottom: 0px;margin-top: 10px;">
+      <view class="content" style="padding-top: 10px;height: 100%;padding-left: 10px;">
+        <image src="{{info.pic}}" style="height: 100%;width: 170px;" mode="aspectFill"></image>
+        <view class="" style="width: 100%;">
+          <view class="text_small">{{info.skuName}}</view>
+          <view style="padding-top: 5px;">
+            <image style="float: left; width: 18px;height: 18px;" src="https://www.ifaceai.com/img/mtyx.png"></image>
+            <text style="float: left;margin-left: 5px;">{{info.categoryName}}</text>
+          </view>
+          <view style="clear: both;margin-top: 40px;">
+            <view>
+              <text style="color: red;font-size: 18px;">¥ </text>
+              <text style="color: red;font-size: 20px;font-weight: bold;">{{info.price/100}}</text>
+              
+              <text style="float: right;color: #999;line-height: 25px;font-size: 14px;">已售{{info.salesVolume}}</text>
+            </view>
+            
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="cu-load load-icon {{isLoad?'loading':'over'}}"></view> 
+  <view hidden="{{isLoad}}" style="text-align: center;color: #999;height: 50px;line-height: 50px;">-我是有底线的-</view>
+
+</view>

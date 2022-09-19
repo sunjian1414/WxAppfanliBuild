@@ -1,0 +1,28 @@
+<ui-custom bgColor="bg-white" isBack="{{true}}">
+    <view slot="content">附近秒杀</view>
+</ui-custom>
+<view style="padding:10px">
+    <view hidden="{{!showSke}}" class="bg-white" style="border-radius: 5px; margin: 0px;">
+        <import src="../../index3/index3.skeleton.wxml"/>
+        <template is="skeleton"/>
+    </view>
+    <view wx:if="{{showTip}}" style="text-align: center;color: #999;padding-top: 30px;">暂无订单记录</view>
+    <view class="cu-list menu-avatar bg-white">
+        <view capture-bind:tap="msItemClickHand" class="cu-item" style="height: 120px;" wx:for="{{list}}" wx:key="{{index}}" data-index="{{index}}">
+            <view class="cu-avatar bg-white" style="height: 100%;width: 110px;">
+                <image src="{{item.img}}" style="width: 110px;" mode="widthFix"></image>
+            </view>
+            <view class="content" style="left: 140px;height: 100%;">
+                <view class="text-black text_small" style="max-height: 50px;line-height: 20px; font-size: 16px;font-weight: bold;">{{item.title}}</view>
+                <view style="text-decoration: line-through;font-size: 14px;color: #999;">市场价{{item.marketPrice/100}}元</view>
+                <view class="text-red" style="font-size: 16px;">秒杀价 ¥ {{item.finalPrice/100}}元</view>
+            </view>
+            <view class="action" style="width: auto;">
+                <text class="cuIcon-locationfill lg text-red" style="margin-left: 0px;"></text> <text class="text-gray">{{item.distance}}km</text>
+            </view>
+        </view>
+    </view>
+</view>
+<view style="text-align: center;color: #999;padding-top: 10px;padding-bottom: 40px;" wx:if="{{showBottom}}">-我是有底线的-</view>
+<view class="cu-load load-icon {{!isLoad?'loading':'over'}}"></view>
+<view style="height: 30px;"></view>

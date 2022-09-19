@@ -1,0 +1,83 @@
+<ui-custom bgColor="bg-red" isBack="{{true}}">
+    <view slot="content">砍价免费拿</view>
+</ui-custom>
+
+<view style="margin: 10px;">
+    <view class="bg-white" style="height: 400px;padding: 15px;border-radius:10px;">
+        
+        <view class="cu-list menu-avatar" style="border-radius: 5px;">
+            <view class="cu-item cur" style="height: 150px; background-color: #f1f1f1;position: relative;">
+                <view class="cu-avatar radius lg bg-white" style="width: 110px; height: 130px;left: 10px;border-radius: 5px;">
+                    <image style="width: 100%;" mode="widthFix" src="{{info.showLogo}}"></image>
+                </view>
+                <view class="content" style="left: 130px;width: calc(100% - 96rpx - 60rpx - 110rpx);">
+                    <view>
+                        <text style="font-size: 18px;line-height: 22px;" class="text-cut text_small_1">{{info.shopTitle}}</text>
+                    </view>
+                    <view>
+                        <view class="cu-progress round" style="width: 65%; margin-top: 20px; background-color: #bdacac;">
+                            <view class="bg-red" style="width:{{info.itemProgress+'%'}};"></view>
+                        </view>
+                        <text style="font-size: 12px;width: 35%;display: inline-block;text-align: right;">已砍{{info.itemProgress}}%件</text>
+                    </view>
+                    <view style="font-size: 14px;margin-top: 5px;" class="text-gray">有效时间内未能砍成即为砍价失败</view>
+                    <view class="text-red" style="margin-top: 5px;">砍到0元拿</view>
+                </view>
+                <image wx:if="{{info.isSuccess==0}}" src="https://www.ifaceai.com/img/kjsuccess.png" style="width: 80px;position: absolute;right: 0px;bottom: 10px;" mode="widthFix"></image>
+            </view> 
+        </view>
+        <view wx:if="{{info.isSuccess==1||info.isSuccess==2}}" style="font-size: 20px;text-align: center;padding-top: 25px;">已砍<text class="text-red">{{info.kMoney}}</text>元，还差<text class="text-red">{{info.yMoney}}</text>元</view>
+        <view wx:if="{{info.isSuccess==0}}" style="font-size: 20px;text-align: center;padding-top: 25px;" class="text-red">恭喜你，砍价成功</view>
+        <view wx:if="{{info.isSuccess==2}}" style="font-size: 20px;text-align: center;padding-top: 25px;" class="text-red">很遗憾，砍价失败</view>
+        <view style="padding-left: 20px;padding-right: 20px;padding-top: 14px;">
+            <view class="cu-progress round" style="background-color: #f1f1f1;">
+                <view class="bg-yellow" style="width:{{info.moneyProgress+'%'}};"></view>
+            </view>
+        </view>
+        <view style="text-align: center;padding-top: 20px;" wx:if="{{info.isSuccess==1}}">
+            <text class="bg-red text-white" style="padding: 4px;">{{sdateArr[0]}}</text>
+            <text class="text-red" style="padding-left: 4px;padding-right: 4px;">:</text>
+            <text class="bg-red text-white" style="padding: 4px;">{{sdateArr[1]}}</text>
+            <text class="text-red" style="padding-left: 4px;padding-right: 4px;">:</text>
+            <text class="bg-red text-white" style="padding: 4px;">{{sdateArr[2]}}</text>
+            <text style="font-size: 14px;padding-left: 5px;">后砍价结束</text>
+        </view>
+        <view style="padding-top: 30px;" wx:if="{{info.isSuccess==1}}">
+            <button open-type="share" class="anima ra cu-btn round button-hover text-red buttonClass" style="height: 50px;font-size: 18px; width: 100%;background-color: #f9f953;">{{btntxt}}</button>
+        </view>
+        <view style="padding-top: 30px;" wx:if="{{info.isSuccess==2}}">
+            <button capture-bind:tap="startKjHand" class="cu-btn round text-white bg-orange" style="height: 50px;font-size: 18px; width: 100%;">重新发起砍价</button>
+        </view>
+        <view style="padding-top: 25px;" wx:if="{{info.isSuccess==0}}">
+            <button class="cu-btn round text-white bg-grey" style="height: 50px;font-size: 18px; width: 100%;">该商品不能再次发起</button>
+            <button capture-bind:tap="openSuccessOrderHand" class="cu-btn round line-orange text-red" style="width: 100%;height: 50px;margin-top: 12px;font-size: 18px;">查看我的订单</button>
+        </view>
+    </view>
+    <view style="margin-top: -20px;"> 
+        <image style="height: 50px;float: left;" mode="heightFix" src="https://www.ifaceai.com/img/join.png"></image>
+        <image style="height: 50px;float: right;" mode="heightFix" src="https://www.ifaceai.com/img/join.png"></image>
+    </view>
+    <view class="bg-white" style="min-height: 130px;margin-top: 30px;padding: 20px;border-radius: 10px;">
+        <view class="text-red" style="text-align: center;font-size: 16px;">砍价榜</view>
+        <view class="cu-list menu-avatar">
+            <view class="cu-item" wx:for="{{kjList}}" wx:key="{{index}}">
+                <view class="cu-avatar round lg" style="left: 10px; background-image:url({{item.logo}});"></view>
+                <view class="content" style="left: 70px;">
+                    <view class="text-grey">{{item.yname}}</view>
+                    <view class="text-gray text-sm flex">
+                        {{item.create_date}}
+                    </view>
+                </view>
+                <view class="action" style="width: auto;padding-right: 10px;">
+                    <view class="text-grey" style="font-size: 16px;">砍掉{{item.money}}元</view>
+                </view>
+            </view> 
+            <view wx:if="{{!isLoad}}" style="text-align: center;"> 
+                <text style="font-size: 20px;" class="cuIcon-loading2 iconfont-spin"></text>
+            </view>
+            <view wx:if="{{isLoad}}" style="text-align: center;color: #999;;">
+                <text>-已经到底线-</text>
+            </view>
+        </view>
+    </view>
+</view>

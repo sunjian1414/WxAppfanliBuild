@@ -1,0 +1,104 @@
+<normal-custom bgColor="bg-white" isBack="{{true}}">
+    <view slot="content">订单集合</view>
+</normal-custom>
+<view class="bg-white" style="z-index: 2; position: fixed;width:100%;left:0px;top: {{CustomBar}}px;">
+    <view class="grid col-2 bg-white" style="height: 35px;line-height: 35px;">
+        <view style="color: rgb(250, 59, 128);padding-left: 10px;">
+            <text capture-bind:tap="selectOrderTypeHand" style="float: left;">{{orderTypeTxt}}</text>
+            <text style="float: left; color: rgb(250, 59, 128);transform: rotate(90deg);" class="cuIcon-roundrightfill lg text-gray"></text>
+            <text capture-bind:tap="openKjOrderHistoryHand" class="text-orange" style="padding-left: 5px;padding-right: 5px; text-decoration: underline; float: left;margin-left: 20px;">砍价订单</text>
+            <image src="https://www.ifaceai.com/img/kjicon.png" style="float: left;width: 17px;margin-top: 8px;" mode="widthFix"></image>
+        </view>
+        <view style="text-decoration: underline; color: red;text-align: right;padding-right: 10px;">
+            <text capture-bind:tap="openJiesuan">各平台结算说明</text>
+        </view>
+    </view>
+    <view class="bg-white" style="height: 35px;line-height: 35px;border-top: 1px solid #f1f1f1;">
+        <text capture-bind:tap="typeHand" style="color:{{index==TabCur?'rgb(250, 59, 128)':''}};padding:0 5px 0 10px;" wx:for="{{typeList}}" data-val="{{item.val}}" data-id="{{index}}">{{item.name}}</text>
+        <text capture-bind:tap="openDhOrderHistory" style="float: right;color: #10aeff;text-decoration: underline;padding-right: 10px;">商城订单</text>
+    </view>
+</view>
+
+<view style="margin-top: {{CustomBar+70}}px;">
+    
+    <view style="padding-bottom: 20px;">
+        <view class="cu-card article" style="background-color: #f1f1f1;width: 100%;">
+            <view wx:if="{{showTip}}" style="text-align: center;color: #999;padding-top: 30px;">暂无订单记录</view>
+            <view capture-bind:tap="shopItemClick" data-index="{{index}}" wx:for="{{showDataList}}" wx:key="{{index}}" class="cu-item shadow" style="padding: 10px; margin:5px 0 0 0;">
+                <view style="font-size: 14px;">
+                    <image wx:if="{{item.type=='tb'}}" src="https://www.ifaceai.com/img/taobao.png" style="float: left;width: 20px;" mode="widthFix"></image>
+                    <image wx:if="{{item.type=='jd'}}" src="https://www.ifaceai.com/img/jd2.png" style="float: left;width: 20px;" mode="widthFix"></image>
+                    <image wx:if="{{item.type=='pdd'}}" src="https://www.ifaceai.com/img/pingduoduo.png" style="float: left;width: 20px;" mode="widthFix"></image>
+                    <image wx:if="{{item.type=='phone'}}" src="https://www.ifaceai.com/img/phoneico.png" style="float: left;width: 20px;" mode="widthFix"></image>
+                    <image wx:if="{{item.type=='美团外卖'}}" src="https://www.ifaceai.com/img/waimai.png" style="float: left;width: 20px;" mode="widthFix"></image>
+                    <image wx:if="{{item.type=='饿了么外卖'}}" src="https://www.ifaceai.com/img/emwm.png" style="float: left;width: 20px;" mode="widthFix"></image>
+                    <image wx:if="{{item.type=='饿了么生鲜'}}" src="https://www.ifaceai.com/img/emwm.png" style="float: left;width: 20px;" mode="widthFix"></image>
+                    <image wx:if="{{item.type=='滴滴打车'}}" src="https://www.ifaceai.com/img/dd1.png" style="float: left;width: 20px;" mode="widthFix"></image>
+                    <image wx:if="{{item.type=='花小猪打车'}}" src="https://www.ifaceai.com/img/hxz.png" style="float: left;width: 20px;" mode="widthFix"></image>
+                    <image wx:if="{{item.type=='高德打车'}}" src="https://www.ifaceai.com/img/gdmap.png" style="float: left;width: 20px;" mode="widthFix"></image>
+                    <image wx:if="{{item.type=='肯德基'}}" src="https://www.ifaceai.com/img/kfcicon.png" style="float: left;width: 20px;" mode="widthFix"></image>
+                    <image wx:if="{{item.type=='麦当劳'}}" src="https://www.ifaceai.com/img/mdl1.png" style="float: left;width: 20px;" mode="widthFix"></image>
+                    <text style="color: #999;padding-left: 5px;">订单号：{{item.orderId}}</text>
+                    <text style="color: white; float: right;border-radius: 20px;padding: 2px 8px 2px 8px;background-color: {{item.data_status==0?'#0BB20C':item.data_status==1?'#5986E9':item.data_status==2?'orange':'#cccccc'}};">
+                        <block wx:if="{{item.data_status==0}}">已结算
+                        </block>
+                        <block wx:if="{{item.data_status==1}}">待结算
+                        </block>
+                        <block wx:if="{{item.data_status==2}}">已退货
+                        </block>
+                        <block wx:if="{{item.data_status==3}}">已失效
+                        </block>
+                    </text>
+                </view>
+                <view style="clear: both;padding-top: 5px;">
+                    <view class="cu-list menu-avatar">
+                        <view class="cu-item">
+                            <view style="position: absolute;left: 10px;">
+                                <image wx:if="{{item.type=='phone'}}" src="https://www.ifaceai.com/img/phoneico.png" style="width: 60px;" mode="widthFix"></image>
+                                <image wx:elif="{{item.type=='美团外卖'}}" src="https://www.ifaceai.com/img/waimai.png" style="width: 60px;" mode="widthFix"></image>
+                                <image wx:elif="{{item.type=='肯德基'}}" src="https://www.ifaceai.com/img/kfcicon.png" style="width: 60px;" mode="widthFix"></image>
+                                <image wx:elif="{{item.type=='麦当劳'}}" src="https://www.ifaceai.com/img/mdl1.png" style="width: 60px;" mode="widthFix"></image>
+                                <image wx:elif="{{item.type=='滴滴打车'}}" src="https://www.ifaceai.com/img/dd1.png" style="width: 60px;" mode="widthFix"></image>
+                                <image wx:elif="{{item.type=='花小猪打车'}}" src="https://www.ifaceai.com/img/hxz.png" style="width: 60px;" mode="widthFix"></image>
+                                <image wx:else src="{{item.logo}}" style="width: 60px;float: left;" mode="widthFix"></image>
+                            </view>
+                            <view class="content"> 
+                                <view style="line-height: 40rpx;" class="text-grey text_small">{{item.title}}</view>
+                            </view>  
+                            <view class="action"> 
+                                <text style="font-size: 10px;">¥</text>
+                                <text style="font-size: 18px;font-weight: bold;padding-left: 5px;">{{item.anceMoney}}</text>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="grid col-2" style="clear: both;padding-top: 15px;">
+                        <view><text style="color: #999;">{{item.payTime}}付款</text></view>
+                        <view style="text-align:right;" wx:if="{{item.data_status==1}}">
+                            <text style="color: #999;">确认收货仍需要等待结算</text>
+                        </view> 
+                        <view style="text-align:right;" wx:if="{{item.data_status==3}}">
+                            <text style="color: #999;">1:佣金小于0.01元，2:未付款；3:取消订单</text>
+                        </view>
+                        <view style="text-align:right;" wx:if="{{item.data_status==0}}">
+                            <text style="color: #999;">{{item.sTime}}结算</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view style="text-align: center;color: #999;padding-top: 10px;padding-bottom: 40px;" wx:if="{{showBottom}}">-我是有底线的-</view>
+        <view class="cu-load load-icon {{!isLoad?'loading':'over'}}"></view>
+    </view>
+</view>
+
+<action-sheet hidden="{{actionSheetHidden}}" bindchange="listenerActionSheet">
+    <view style="text-align: center;line-height: 40px;height: 40px;font-size: 16px;color:#999;">订单筛选</view>
+    <block data-index="{{index}}" wx:for="{{actionSheetItems}}" wx:for-item="item" wx:key="{{index}}">
+        <action-sheet-item data-index="{{index}}" capture-bind:tap="menuItemHand" style="height: 30px;line-height: 30px;">
+            <image src="{{item.img}}" style="margin-top: 5px; width: 20px;float:left;margin-left: 40%;" mode="widthFix"></image>
+            <text style="font-size:14px;float: left;">{{item.title}}</text>
+        </action-sheet-item>
+    </block>
+    
+    <action-sheet-cancel>取消</action-sheet-cancel>
+</action-sheet>

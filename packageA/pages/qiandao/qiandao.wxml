@@ -1,0 +1,40 @@
+<ui-custom bgColor="bg-red" isBack="{{true}}">
+    <view slot="content">每日签到</view>
+</ui-custom>
+
+<view style="background: #FFFFFF;height: 100vh;">
+    <view style="padding: 19px;">
+        <view style="font-size: 19px;font-weight: 600;color: #333333;margin-bottom: 9px;">累计签到</view>
+        <view style="font-size: 14px;font-weight: 400;color: #666666;margin-bottom: 4px;">已签奖励：{{meMoney}}元</view>
+        <view style="font-size: 19px;font-weight: 600;color: #333333;margin-bottom: 9px;padding-top: 15px;">签到榜单</view>
+        <view class="cu-list menu-avatar">
+            <view class="cu-item" wx:for="{{list}}" wx:key="{{index}}" style="border-bottom:1px solid #f1f1f1;">
+                <view class="cu-avatar round lg" style="background-image:url({{item.logo}});left: 0px;"></view>
+                <view class="content">
+                    <view class="text-grey">{{item.yname}}</view>
+                </view>
+                <view class="action" style="width: auto;">
+                    <view class="cu-tag round bg-red">累计签到 {{item.money}}元</view>
+                </view>
+            </view>
+        </view>
+
+        
+        <view style="margin: 10px 0 5px 0;font-size: 14px;font-weight: 500;color: #666666;">签到规则:</view>
+        <view style="font-size: 12px;font-weight: 400;color: #949A9F;margin-bottom: 4px;">1.每日只能签到一次</view>
+        <view style="font-size: 12px;font-weight: 400;color: #949A9F;">2.签到随机发放奖励金额</view>
+    </view>
+
+
+    
+    <view class="wall-of-buttons" style="display: flex;justify-content: center;margin-top: 70px;margin-bottom: 10px;">
+        <view capture-bind:tap="submitHand" class="large orange button" style="color: white; text-align: center;line-height: 137px;font-size: 24px; border-radius: 50%; width: 137px;height: 137px;background: #e54d42;box-shadow: 0px 5px 10px 0px rgba(255, 90, 167, 0.4);border: 0px solid #ffffff;">签到</view>
+    </view> 
+
+    
+    <view style="display: flex;justify-content: center;padding: 0 50px;">
+        <span style="font-size: 12px;font-weight: 400;color: #949A9F;text-align: center;">每天保持签到，越签越多</span>
+    </view>
+
+
+</view>

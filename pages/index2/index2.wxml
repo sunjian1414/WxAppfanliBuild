@@ -1,0 +1,119 @@
+<index2-custom cityName="{{cityName}}" cityId="{{cityId}}" bind:titleClick="titleClick" bind:inputEnter="keyworkEnter"></index2-custom>
+<view style="padding: 10px 10px 0 10px;">
+    <view class="bg-white" style="border-radius: 10px;overflow:hidden;">
+        <view class="cu-list menu">
+            <view class="cu-item arrow">
+                <view class="content">
+                    <image src="https://www.ifaceai.com/img/xsms.png" mode="heightFix"></image>
+                </view>
+                <view class="action" capture-bind:tap="openMore">
+                    <view class="cu-tag round bg-blue light">查看更多</view>
+                </view>
+            </view>
+        </view>
+        <view style="overflow-x: auto;padding: 0px 10px;height: 134px;" class="bg-white">
+            <view wx:if="{{itemList.length<=0}}" class="cu-load load-icon loading"></view>
+            <view style="width: {{itemList.length*110}}px;padding-bottom: 10px;">
+                <view data-index="{{index}}" capture-bind:tap="msItemClickHand" wx:for="{{itemList}}" wx:for-item="item" wx:key="{{index}}" style="margin-right: 10px; float: left; font-size: 16px;position: relative;width: 100px;height: auto;overflow:hidden;">
+                    <image style="width: 100px;" mode="widthFix" src="{{item.img}}"></image>
+                    <view class="text_small_1" style="padding-top: 5px;">{{item.title}}</view>
+                    <view style="color:red;padding-left: 2px;padding-top: 5px;">{{item.remark}}</view>
+                    <view style="width: auto;text-align: left; border-bottom-right-radius: 20px; background-color: red;left: 0px;top: 0px;color: white;position: absolute;">
+                        {{item.zk}}
+                    </view>
+                </view>
+                <view style="clear: both;"></view>
+            </view>
+        </view>
+    </view>
+</view>
+<view>
+    <scroll-view style="padding: 10px 10px 0 10px;font-size: 16px;" scroll-x class="nav" scroll-with-animation scroll-left="{{scrollLeft}}">
+        <view style="width: 85px;text-align: center;" class="cu-item {{index==TabCur?'text-orange cur':''}}" wx:for="{{type1List}}" wx:key bindtap="tabSelect" data-index="{{index}}" data-id="{{item.id}}">
+            {{item.name}}
+        </view>
+    </scroll-view>
+    <view>
+        <view class="grid col-4 text-center" style="padding: 0 10px 0 10px;height: 40px;line-height: 40px;">
+            <view style="color:{{type_active_index==0?'orange':'#999'}};" capture-bind:tap="typeItemClick" data-index="0">全部分类<text style="color:{{type_active_index==0?'orange':'#999'}};">▼</text></view>
+            <view style="color:{{type_active_index==1?'orange':'#999'}};" capture-bind:tap="typeItemClick" data-index="1">附近<text style="color:{{type_active_index==1?'orange':'#999'}};">▼</text></view>
+            <view style="color:{{type_active_index==2?'orange':'#999'}};" capture-bind:tap="typeItemClick" data-index="2">离我最近<text style="color:{{type_active_index==2?'orange':'#999'}};">▼</text></view>
+            <view style="color:{{type_active_index==3?'orange':'#999'}};" capture-bind:tap="typeItemClick" data-index="3">筛选<text style="color:{{type_active_index==3?'orange':'#999'}};">▼</text></view>
+        </view>
+        
+        <view class="cu-list grid col-4 no-border bg-white" wx:if="{{type_active_index==0}}">
+            <view class="cu-item" wx:for="{{type_item_list}}" wx:key data-id="{{index}}">
+                <button capture-bind:tap="subTypeItemHand" style="background-color: {{item.id==cat1Ids?'rgb(245, 231, 206)':'#f1f1f1'}};color:{{item.id==cat1Ids?'rgb(238, 160, 14)':''}}; font-size: 14px; width: 80px;padding: 0px; font-weight: normal;" data-id="{{item.id}}" class="cu-btn">{{item.name}}</button>
+            </view>
+        </view>
+        
+        <view class="cu-list grid col-4 no-border bg-white" wx:if="{{type_active_index==1}}">
+            <view class="cu-item" wx:for="{{type_list2}}" wx:key data-id="{{index}}">
+                <button capture-bind:tap="subDisItemHand" style="background-color: {{item.dis==distance?'rgb(245, 231, 206)':'#f1f1f1'}};color:{{item.dis==distance?'rgb(238, 160, 14)':''}}; font-size: 14px; width: 80px;padding: 0px; font-weight: normal;" data-dis="{{item.dis}}" class="cu-btn">{{item.name}}</button>
+            </view>
+        </view>
+        
+        <view class="cu-list grid col-4 no-border bg-white" wx:if="{{type_active_index==2}}">
+            <view class="cu-item" wx:for="{{type_list3}}" wx:key data-id="{{index}}">
+                <button capture-bind:tap="subJuItemHand" style="background-color: {{item.id==sortType?'rgb(245, 231, 206)':'#f1f1f1'}};color:{{item.id==sortType?'rgb(238, 160, 14)':''}}; font-size: 14px; width: 80px;padding: 0px; font-weight: normal;" data-id="{{item.id}}" class="cu-btn">{{item.name}}</button>
+            </view>
+        </view>
+        
+        <view class="bg-white" wx:if="{{type_active_index==3}}">
+            <view style="padding: 10px 0 0 10px;font-size: 16px;">全部优惠</view>
+            <view class="cu-list grid col-4 no-border">
+                <view class="cu-item" wx:for="{{allyhbtnlist}}" wx:key data-id="{{index}}">
+                    <button capture-bind:tap="subSxItemHand" style="background-color: {{item.id==dealType?'rgb(245, 231, 206)':'#f1f1f1'}};color:{{item.id==dealType?'rgb(238, 160, 14)':''}}; font-size: 14px; width: 80px;padding: 0px; font-weight: normal;" data-id="{{item.id}}" class="cu-btn">{{item.name}}</button>
+                </view>
+            </view>
+            
+        </view>
+    </view>
+</view>
+
+
+<view class="" style="background-color: #f1f1f1;">
+    <view wx:if="{{showSke}}" class="bg-white" style="border-radius: 5px; margin: 15px;">
+        <import src="index2.skeleton.wxml"/>
+        <template is="skeleton"/>
+    </view>
+
+    
+    <view class="cu-list menu-avatar bg-white">
+        <view capture-bind:tap="shopItemClickHand" class="cu-item" style="height: 180px;border-bottom: 4px solid #f1f1f1;" wx:for="{{showDataList}}" wx:key="{{index}}" data-index="{{index}}">
+            <view class="cu-avatar bg-white" style="height: 100%;width: 110px;">
+                <image src="{{item.dealBaseInfo.defaultPic}}" style="width: 110px;transform: translateY(-50%);margin-top: 25px;" mode="widthFix"></image>
+            </view>
+            <view class="content" style="width: calc(100% - 96rpx - 60rpx - 120rpx); left: 140px;height: 100%;padding-top: 10px;">
+                <view class="text-black text_small_1" style="max-height: 40px;line-height: 20px; font-size: 16px;font-weight: bold;min-height: 30px;">{{item.shopInfo.shopName}}</view>
+                <view>
+                    <star style="float: left;width: 100px;" key="{{item.shopInfo.shopPower/10}}"></star>
+                    <text class="text-red">{{item.shopInfo.shopPower/10}}</text>
+                </view>
+                <view style="clear: both; color: #999;font-size: 16px;">
+                    <text>{{item.shopInfo.cateName}}</text><text style="padding-left: 10px;">{{item.shopInfo.regionName}}</text>
+                </view>
+                <view style="padding-top: 5px;height: 30px;">
+                    <text class="bg-red text-white" style="float: left; border-radius: 5px;padding-left: 4px;padding-right: 4px;">惠</text>
+                    <text class="text_small_1" style="width: 80%;float: left;margin-top: 5px;padding-left: 5px;">{{item.dealBaseInfo.description}}</text>
+                </view>
+                <view class="" style="clear: both;margin-top: 10px;height: 45px;line-height: 45px;">
+                    <view style="display: inline-block;">
+                        <text class="text-red">¥{{item.dealBaseInfo.finalPrice/100}}</text>
+                        <text style="padding-left: 5px; text-decoration: line-through;">¥{{item.dealBaseInfo.marketPrice/100}}</text>
+                    </view>
+                    <view style="padding-right: 10px;float: right;">
+                        <button class="bg-red text-white round" style="width: auto; float: right;font-size: 14px;padding-left: 10px;padding-right: 10px;">领券省{{(item.dealBaseInfo.marketPrice-item.dealBaseInfo.finalPrice)/100}}元</button>
+                    </view>
+                </view>
+            </view>
+            <view class="action" style="width: auto;margin-bottom: 20px;padding-right: 10px;">
+                <text class="cuIcon-locationfill lg text-red" style="margin-left: 0px;"></text> <text class="text-gray">{{item.shopInfo.distanceToShow}}</text>
+            </view>
+        </view>
+    </view>
+
+
+</view>
+<view class="cu-load load-icon {{!isLoad?'loading':'over'}}"></view>
+<view wx:if="{{isLoad}}" style="padding-top: 30px; text-align: center;color: #999;">-我是有底线的-</view>

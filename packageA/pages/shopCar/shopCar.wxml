@@ -1,0 +1,107 @@
+<ui-custom bgColor="bg-car" isBack="{{true}}">
+    <view slot="content">购物车</view>
+</ui-custom>
+<view style="border-bottom-left-radius: 40px;border-bottom-right-radius: 40px; position: fixed;top: 0px;width: 100%;height: 200px;" class="bg-car">
+</view>
+<view style="overflow-y: auto;height: {{_ch}}px; padding-left: 20px;padding-right: 20px; position: fixed;top: {{CustomBar+30}}px;width: 100%;">
+    <view wx:if="{{showTip}}" style="text-align: center; height: 100%; padding: 10px; box-shadow: 0 0 1px 4px #f1f1f1;  margin-bottom: 20px; border-radius: 10px;" class="bg-white">
+        <image style="width:250rpx;margin-top: 100rpx;" mode="widthFix" src="https://www.ifaceai.com/img/gwc_no.png"></image>
+        <view style="text-align: center;padding-top: 10px;">您的购物车有点寂寞</view>
+        <button capture-bind:tap="goHome" style="margin-top: 20px;" class="cu-btn">马上去逛逛</button>
+    </view>
+    <view wx:if="{{list.length<=0&&showTip==false}}" style="text-align: center; height: 100%; padding: 10px; box-shadow: 0 0 1px 4px #f1f1f1;  margin-bottom: 20px; border-radius: 10px;" class="bg-white">
+        <view style="margin-top: 20px;" class="cu-load load-icon loading"></view>
+        <text>加载中</text>
+    </view>
+    <checkbox-group bindchange="itemChange">
+        <view wx:for="{{list}}" wx:for-item="item" wx:key="{{index}}" style="padding: 10px; box-shadow: 0 0 1px 4px #f1f1f1;  margin-bottom: 20px; border-radius: 10px;" class="bg-white">
+            <view style="height: 25px;">
+                <text style="float: left;margin-top: 2px;margin-left: 5px;">{{item.type}}</text>
+            </view>
+            <view class="cu-card article" style="clear: both;">
+                <view wx:for="{{item.list}}" wx:for-item="info" wx:key="{{info.uid}}" class="cu-item shadow" style="margin-right: 0px; padding-bottom: 10px;height: 150px;margin-bottom: 0px;margin-top: 10px;margin-left: 0px;">
+                    <view class="content" style="padding-top: 10px;height: 100%;padding-left: 0px;">
+                        <view style="float: left;line-height: 220rpx;margin-right: 10px;">
+                            <checkbox bindchange="itemChange" checked="{{info.check}}" value="{{info.uid}}" data-index="{{index}}" data-uid="{{info.uid}}" class="round"></checkbox>
+                        </view>
+                        <image catchtap="itemClick" data-uid="{{info.uid}}" src="{{info.img}}" style="height: 100%;width: 170px;" mode="aspectFill"></image>
+                        <view class="" style="width: 100%;">
+                            <view catchtap="itemClick" data-uid="{{info.uid}}" style="font-size: 18px;min-height: auto;height: 40px;line-height: 20px;" class="text_small">{{info.content}}</view>
+                            <view style="padding-top: 5px;">
+                                <text catchtap="itemClick" data-uid="{{info.uid}}" class="text_small_1" style="width: 70%; float: left;">{{info.title}}</text>
+                            </view>
+                            <view style="clear: both;margin-top: 25px;">
+                                <view style="margin-top: 12px;">
+                                    <view style="float: left; text-align: left; background-size: 100% 100%;width: 80px;height: 25px;line-height: 25px;">
+                                        <text style="font-weight: bold; color: #5bc21b; font-size: 18px;">¥{{info.showPrice}}</text>
+                                    </view>
+                                    <view style="float: right;line-height: 25px;">
+                                        <cl-stepper bind:change="stepChangeHand" value="{{info.payCount}}" index="{{info.uid}}"/>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </checkbox-group>
+</view>
+
+<view class="bg-white" style="position: fixed;bottom: 0px;width: 100%;left: 0px;z-index: 2;height: 50px;border-top: 1px solid #cccccc;">
+    <view style="float: left;padding-top: 24rpx;padding-left: 20rpx;">
+        <checkbox-group bindchange="selectAllChange" style="float: left;">
+            <checkbox value="true" style="float: left;" class="round"></checkbox><text style="margin-left: 10rpx;float: left;margin-top: 6rpx;">全选</text>
+        </checkbox-group>
+        <text capture-bind:tap="delHand" class="text-orange" style="float: left; text-decoration: underline;padding: 3px 0px 0 10px;">删除</text>
+    </view>
+    <view style="float: right;padding-right: 20rpx;">
+        <text style="font-size: 14px;color: #999;">合计：</text><text class="text-red" style="line-height: 50px; font-size: 20px;font-weight: bold;">¥{{countmoney}}</text>
+        <button capture-bind:tap="hejiHand" class="cu-btn bg-car round" style="float: right;margin-top: 7px; width: 100px;margin-left: 15px;">结算({{payAllCount}})</button>
+    </view>
+</view>
+
+
+
+
+<view class="cu-modal bottom-modal {{modalName=='bottomModalScore'?'show':''}}">
+    <view class="cu-dialog">
+        <view class="cu-bar bg-white">
+            <view class="action text-green"></view>
+            <view class="action text-black" style="font-size: 20px;" bindtap="hideModal">X</view>
+        </view>
+        <view class="bg-white" style="padding: 0 10px 10px 10px;">
+            <view>
+                <view class="text-left">支付方式【{{payType==0?'积分支付':'现金支付'}}】</view>
+                <view class="text-left">
+                    <text capture-bind:tap="goScore" style="margin-top: 10px; display: inline-block;padding: 2px 20px 2px 20px;font-size: 16px; color:{{payType==0?'white':'#cb605c'}};background-color: {{payType==0?'#cb605c':'#fdedee'}};border:1px solid #cb605c;border-radius: 20px;">{{countscore}}积分</text>
+                    <text capture-bind:tap="goMoney" style="margin-left: 10px; margin-top: 10px; display: inline-block;padding: 2px 20px 2px 20px;font-size: 16px; color: {{payType==1?'white':'#cb605c'}};background-color: {{payType==1?'#cb605c':'#fdedee'}};border:1px solid #cb605c;border-radius: 20px;">{{countmoney}}元</text>
+                </view>
+            </view>
+            <view style="margin-top: 20px;" class="cu-list menu text-left solid-top solid-bottom">
+                <view capture-bind:tap="openAddress" class="cu-item arrow" style="padding-left: 0px;">
+                    <view class="content">
+                        <text class="cuIcon-locationfill lg text-red"></text>
+                        <block wx:if="{{showLoadingAddress}}">
+                            <text style="display: inline;" class="cu-load load-icon loading"></text>
+                        </block>
+                        <block wx:elif="{{addressId==null}}">
+                            <text class="text-grey">请选择收货地址</text>
+                        </block>
+                        <block wx:else>
+                            <text class="text-grey">{{addressTxt}}</text>
+                        </block>
+                    </view>
+                    <view class="action">
+                    </view>
+                </view>
+            </view>
+            <view class="text-left" style="padding-top: 20px;">
+                <text class="text-red">*</text><text>提示：积分兑换类商品一经兑换，概不接受退货退积分，请用户谨慎兑换。</text>
+            </view>
+        </view>
+        <view>
+            <button capture-bind:tap="submitHand" style="width: 100%;border-radius: 0px;height: 45px;font-size: 18px;" class="cu-btn bg-red">确定</button>
+        </view>
+    </view>
+</view>

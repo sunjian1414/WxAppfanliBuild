@@ -1,0 +1,32 @@
+<ui-custom bgColor="bg-gradual-pink" isBack="{{true}}">
+    <view slot="content">推广海报</view>
+</ui-custom>
+<view style="position: absolute;left: 20px;padding-top: 10px; top: auto;z-index: 2;color: red;"><text class="cuIcon-notificationfill" style="font-size: 16px;"></text>邀请成功得大额积分，积分可兑换商品哦！</view>
+<swiper wx:if="{{!isFace}}" class="sw" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" circular="{{circular}}" vertical="{{vertical}}" interval="{{interval}}" duration="{{duration}}" previous-margin="{{previousMargin}}px" next-margin="{{nextMargin}}px" style="height:{{canvasHeight+30}}px;margin-left: 10px;margin-right: 10px;margin-top: 40px;">
+    <block wx:for="{{background}}" wx:key="*this">
+        <swiper-item>
+            <canvas style="width: 100%; height: 100%;" canvas-id="firstCanvas"></canvas>
+        </swiper-item>
+    </block>
+</swiper>
+
+<view class="grid col-2 text-center" wx:if="{{!isFace}}" style="margin-left: 15px;margin-right: 15px;">
+    <view style="text-align: center;padding-top: 0px;margin-top: 0px;">
+        <button class="cu-btn margin-tb-sm lg" style="background-color: #04BE02; color: white;width: 160px;" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
+            <text class="cuIcon-activity" style="margin-right: 0px;"></text>展示我头像
+        </button>
+    </view>
+    <view style="text-align: center;padding-top: 0px;margin-top: 0px;">
+        <button bindtap="saveImg" class="cu-btn bg-red margin-tb-sm lg" style="width: 160px;">
+            <text class="cuIcon-down" style="margin-right: 0px;"></text>保存到相册
+        </button>
+    </view>
+</view>
+
+
+
+
+<view wx:if="{{isFace}}" class="padding-xl" style="text-align: center;padding-top: 0px;margin-top: 50px;">
+    <button bindtap="openFace" class="cu-btn bg-red margin-tb-sm lg">关注公众号</button>
+</view>
+

@@ -1,0 +1,43 @@
+<ui-custom bgColor="bg-red" isBack="{{true}}">
+    <view slot="content">我的砍价商品</view>
+</ui-custom>
+<view class="bg" style="padding:20px 10px;">
+    <view style="text-align: center;font-size: 24px;font-weight: bold;" class="text-white">官方送福利，商品免费领</view>
+    <view style="border-top-left-radius: 10px;border-top-right-radius: 10px; text-align: center;background-color: #ecc57b;padding: 5px;margin-top: 20px;color: #755f36;">免费领取进行中</view>
+    <view hidden="{{!showSke}}" class="bg-white" style="border-radius: 5px; margin: 0px;">
+        <import src="../../index3/index3.skeleton.wxml"/>
+        <template is="skeleton"/>
+    </view>
+    <view class="cu-list menu-avatar" style="border-bottom-left-radius: 10px;border-bottom-right-radius: 10px; margin-top: 0px;">
+        <view capture-bind:tap="shopItemClick" data-index="{{index}}" wx:for="{{list}}" wx:for-item="item" wx:key="{{index}}" class="cu-item cur" style="height: 200px; background-color: #f1f1f1;">
+            <view class="cu-avatar radius lg bg-white" style="width: 110px; height: 130px;left: 10px;border-radius: 5px;">
+                <image style="width: 100%;" mode="widthFix" src="{{item.showLogo}}"></image>
+            </view>
+            <view class="content" style="padding-top: 10px; border-bottom: {{index<list.length-1?'1':'0'}}px dashed rgb(204, 179, 134);padding-bottom: 15px; left: 130px;width: calc(100% - 96rpx - 60rpx - 110rpx);">
+                <view>
+                    <text style="font-size: 18px;line-height: 22px;" class="text-cut text_small_1">{{item.shopTitle}}</text>
+                </view>
+                <view style="margin-top: 10px;">
+                    <view style="padding-left: 10px;font-size: 14px;">
+                        <text>已砍</text><text class="text-red">{{item.kjMoney}}</text><text>元,仅差</text>
+                        <text class="text-red">{{item.nKjMoney}}</text><text>元</text>
+                    </view>
+                    <view class="cu-progress round" style="width: 80%;margin-left: 10px; margin-top: 0px; background-color: #bdacac;">
+                        <view class="bg-red" style="width:{{item.kjProgress+'%'}};"></view>
+                    </view>
+                </view> 
+                <view style="font-size: 14px;margin-top: 5px;padding-left: 10px;" class="text-gray">
+                    <text class="bg-orange" style="border-radius: 2px;padding: 2px;">{{item.sdateArr[0]}}</text>:<text class="bg-orange" style="border-radius: 2px;padding: 2px;">{{item.sdateArr[1]}}</text>:<text class="bg-orange" style="border-radius: 2px;padding: 2px;">{{item.sdateArr[2]}}</text><text style="font-size: 12px;padding-left: 5px;">后结束</text>
+                </view> 
+                <view style="padding-left: 10px;padding-right: 5px;padding-top: 20px;">
+                    <button wx:if="{{item.isSuccess==1}}" class="cu-btn round btn" style="width: 100%;">继续免费领</button>
+                    <button wx:if="{{item.isSuccess==0}}" class="cu-btn round btn0" style="width: 100%;">已砍成</button>
+                    <button wx:if="{{item.isSuccess==2}}" class="cu-btn round btn2" style="width: 100%;">砍价失败</button>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="cu-load load-icon {{!isLoad?'loading':'over'}}"></view>
+    <view class="bg-white" hidden="{{!showTip}}" style="background-color: transparent; padding-top: 10px; text-align: center;color: #fff;">-你是有底线的-</view>
+    <view style="height: 30px;"></view>
+</view>
