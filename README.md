@@ -35,4 +35,4 @@
 
 #### 技术支持
 添加我的企业微信，请备注说明来自 开源项目<br>
-<img src="static/images/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1.jpg" width="30%" />
+<img src="https://ifaceai.com/img/qiyeweixin.jpg" width="30%" />
