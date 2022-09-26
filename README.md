@@ -23,6 +23,9 @@
 <img src="https://www.ifaceai.com/img/wxappconfig.png" width="50%" /><br><br><br>
 
 4.  小程序发布提交，切记需要在小程序业务域名中加入  www.ifaceai.com  重要的事情说三遍！！！
+发布小程序的过程中，微信会提示需要填写隐私策略，填写可参考如下图所示条款即可<br>
+<img src="https://ifaceai.com/img/fanli_yinsi.png" width="70%" /><br>
+备注：小程序需要申请定位权限（wx.chooseAddress）以及定位权限（wx.getLocation）
 
 #### 推广数据统计
 
