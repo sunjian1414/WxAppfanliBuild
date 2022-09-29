@@ -31,26 +31,6 @@
 4. 发布小程序的过程中，微信会提示需要填写隐私策略，填写可参考如下图所示条款即可<br>
 <img src="https://ifaceai.com/img/fanli_yinsi.png" width="70%" /><br>
 
-#### 小程序公众平台设置
-1. 需要申请的接口权限：<br>
-- 位置选择权限（wx.chooseAddress）<br>
-- 地理定位权限（wx.getLocation）<br>
-2. request合法域名：<br>
-- https://aegis.qq.com<br>
-- https://apis.map.qq.com<br>
-- https://sunjian-1304419014.cos.ap-beijing.myqcloud.com<br>
-- https://tcb-api.tencentcloudapi.com<br>
-- https://www.ifaceai.com<br>
-3. uploadFile合法域名：<br>
-- https://sunjian-1304419014.cos.ap-beijing.myqcloud.com<br>
-- https://www.ifaceai.com<br>
-4. downloadFile合法域名：<br>
-- https://img.alicdn.com<br>
-- https://mp.weixin.qq.com<br>
-- https://p0.meituan.net<br>
-- https://p1.meituan.net<br>
-- https://sunjian-1304419014.cos.ap-beijing.myqcloud.com<br>
-- https://www.ifaceai.com<br>
 
 
 
