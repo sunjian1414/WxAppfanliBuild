@@ -28,11 +28,30 @@
 <img src="https://www.ifaceai.com/img/77.jpg" width="20%" />
 <img src="https://www.ifaceai.com/img/88.jpg" width="20%" /><br>
 <img src="https://www.ifaceai.com/img/wxappconfig.png" width="50%" /><br><br><br>
-
-4.  小程序发布提交，切记需要在小程序业务域名中加入  www.ifaceai.com  重要的事情说三遍！！！
-发布小程序的过程中，微信会提示需要填写隐私策略，填写可参考如下图所示条款即可<br>
+4. 发布小程序的过程中，微信会提示需要填写隐私策略，填写可参考如下图所示条款即可<br>
 <img src="https://ifaceai.com/img/fanli_yinsi.png" width="70%" /><br>
-备注：小程序需要申请定位权限（wx.chooseAddress）以及定位权限（wx.getLocation）
+
+#### 小程序公众平台设置
+1. 需要申请的接口权限：<br>
+一，位置选择权限（wx.chooseAddress）<br>
+二，地理定位权限（wx.getLocation）<br>
+2. request合法域名：<br>
+一，https://aegis.qq.com<br>
+二，https://apis.map.qq.com<br>
+三，https://sunjian-1304419014.cos.ap-beijing.myqcloud.com<br>
+四，https://tcb-api.tencentcloudapi.com<br>
+五，https://www.ifaceai.com<br>
+3. uploadFile合法域名：<br>
+一，https://sunjian-1304419014.cos.ap-beijing.myqcloud.com<br>
+二，https://www.ifaceai.com<br>
+4. downloadFile合法域名：<br>
+一，https://img.alicdn.com<br>
+二，https://mp.weixin.qq.com<br>
+三，https://p0.meituan.net<br>
+四，https://p1.meituan.net<br>
+五，https://sunjian-1304419014.cos.ap-beijing.myqcloud.com<br>
+六，https://www.ifaceai.com<br>
+
 
 #### 推广数据统计
 
