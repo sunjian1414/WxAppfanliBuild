@@ -33,24 +33,25 @@
 
 #### 小程序公众平台设置
 1. 需要申请的接口权限：<br>
-一，位置选择权限（wx.chooseAddress）<br>
-二，地理定位权限（wx.getLocation）<br>
+- 位置选择权限（wx.chooseAddress）<br>
+- 地理定位权限（wx.getLocation）<br>
 2. request合法域名：<br>
-一，https://aegis.qq.com<br>
-二，https://apis.map.qq.com<br>
-三，https://sunjian-1304419014.cos.ap-beijing.myqcloud.com<br>
-四，https://tcb-api.tencentcloudapi.com<br>
-五，https://www.ifaceai.com<br>
+- https://aegis.qq.com<br>
+- https://apis.map.qq.com<br>
+- https://sunjian-1304419014.cos.ap-beijing.myqcloud.com<br>
+- https://tcb-api.tencentcloudapi.com<br>
+- https://www.ifaceai.com<br>
 3. uploadFile合法域名：<br>
-一，https://sunjian-1304419014.cos.ap-beijing.myqcloud.com<br>
-二，https://www.ifaceai.com<br>
+- https://sunjian-1304419014.cos.ap-beijing.myqcloud.com<br>
+- https://www.ifaceai.com<br>
 4. downloadFile合法域名：<br>
-一，https://img.alicdn.com<br>
-二，https://mp.weixin.qq.com<br>
-三，https://p0.meituan.net<br>
-四，https://p1.meituan.net<br>
-五，https://sunjian-1304419014.cos.ap-beijing.myqcloud.com<br>
-六，https://www.ifaceai.com<br>
+- https://img.alicdn.com<br>
+- https://mp.weixin.qq.com<br>
+- https://p0.meituan.net<br>
+- https://p1.meituan.net<br>
+- https://sunjian-1304419014.cos.ap-beijing.myqcloud.com<br>
+- https://www.ifaceai.com<br>
+
 
 
 #### 推广数据统计
