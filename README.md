@@ -35,8 +35,8 @@
 
 #### 小程序公众平台设置
 1. 需要申请的接口权限：
-- 位置选择权限（wx.chooseAddress）<br>
-- 地理定位权限（wx.getLocation）<br>
+- 位置选择权限（wx.chooseAddress）
+- 地理定位权限（wx.getLocation）
 2. request域名列表：
 - https://aegis.qq.com<br>
 - https://apis.map.qq.com<br>
