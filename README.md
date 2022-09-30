@@ -37,7 +37,7 @@
 1. 需要申请的接口权限：<br>
 - 位置选择权限（wx.chooseAddress）<br>
 - 地理定位权限（wx.getLocation）<br>
-2. request合法域名：<br>
+2. request设置列表：<br>
 
 
 
