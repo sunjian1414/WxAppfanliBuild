@@ -43,16 +43,6 @@
 - https://sunjian-1304419014.cos.ap-beijing.myqcloud.com<br>
 - https://tcb-api.tencentcloudapi.com<br>
 - https://www.ifaceai.com<br>
-3. uploadFile合法列表：<br>
-- https://sunjian-1304419014.cos.ap-beijing.myqcloud.com<br>
-- https://www.ifaceai.com<br>
-4. downloadFile合法列表：<br>
-- https://img.alicdn.com<br>
-- https://mp.weixin.qq.com<br>
-- https://p0.meituan.net<br>
-- https://p1.meituan.net<br>
-- https://sunjian-1304419014.cos.ap-beijing.myqcloud.com<br>
-- https://www.ifaceai.com<br>
 
 
 #### 推广数据统计
