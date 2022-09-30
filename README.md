@@ -38,11 +38,14 @@
 - 位置选择权限（wx.chooseAddress）
 - 地理定位权限（wx.getLocation）
 2. request域名列表：
-- https://aegis.qq.com<br>
-- https://apis.map.qq.com<br>
-- https://sunjian-1304419014.cos.ap-beijing.myqcloud.com<br>
-- https://tcb-api.tencentcloudapi.com<br>
-- https://www.ifaceai.com<br>
+- https://aegis.qq.com
+- https://apis.map.qq.com
+- https://sunjian-1304419014.cos.ap-beijing.myqcloud.com
+- https://tcb-api.tencentcloudapi.com
+- https://www.ifaceai.com
+3. uploadFile域名列表：
+- https://sunjian-1304419014.cos.ap-beijing.myqcloud.com
+- https://www.ifaceai.com
 
 
 #### 推广数据统计
