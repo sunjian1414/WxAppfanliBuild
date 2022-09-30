@@ -38,7 +38,7 @@
 - 位置选择权限（wx.chooseAddress）<br>
 - 地理定位权限（wx.getLocation）<br>
 2. request域名列表：<br>
-h t t p s : // a e g i s .q q. c o m <br>
+- https://aegis.qq.com<br>
 
 
 #### 推广数据统计
