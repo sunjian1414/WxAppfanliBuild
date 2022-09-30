@@ -46,6 +46,13 @@
 3. uploadFile域名列表：
 - https://sunjian-1304419014.cos.ap-beijing.myqcloud.com
 - https://www.ifaceai.com
+4. downloadFile域名列表：
+- https://img.alicdn.com
+- https://mp.weixin.qq.com
+- https://p0.meituan.net
+- https://p1.meituan.net
+- https://sunjian-1304419014.cos.ap-beijing.myqcloud.com
+- https://www.ifaceai.com
 
 
 #### 推广数据统计
