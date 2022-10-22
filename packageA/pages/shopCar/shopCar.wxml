@@ -36,7 +36,7 @@
                                         <text style="font-weight: bold; color: #5bc21b; font-size: 18px;">¥{{info.showPrice}}</text>
                                     </view>
                                     <view style="float: right;line-height: 25px;">
-                                        <cl-stepper bind:change="stepChangeHand" value="{{info.payCount}}" index="{{info.uid}}"/>
+                                        <cl-stepper bind:change="stepChangeHand" value="{{info.payCount}}" index="{{info.uid}}" />
                                     </view>
                                 </view>
                             </view>
@@ -63,7 +63,7 @@
 
 
 
-
+<!--积分兑换弹出框-->
 <view class="cu-modal bottom-modal {{modalName=='bottomModalScore'?'show':''}}">
     <view class="cu-dialog">
         <view class="cu-bar bg-white">
@@ -72,10 +72,10 @@
         </view>
         <view class="bg-white" style="padding: 0 10px 10px 10px;">
             <view>
-                <view class="text-left">支付方式【{{payType==0?'积分支付':'现金支付'}}】</view>
+                <view class="text-left">支付方式【{{payType==0?'积分支付':showPay?'现金支付':''}}】</view>
                 <view class="text-left">
                     <text capture-bind:tap="goScore" style="margin-top: 10px; display: inline-block;padding: 2px 20px 2px 20px;font-size: 16px; color:{{payType==0?'white':'#cb605c'}};background-color: {{payType==0?'#cb605c':'#fdedee'}};border:1px solid #cb605c;border-radius: 20px;">{{countscore}}积分</text>
-                    <text capture-bind:tap="goMoney" style="margin-left: 10px; margin-top: 10px; display: inline-block;padding: 2px 20px 2px 20px;font-size: 16px; color: {{payType==1?'white':'#cb605c'}};background-color: {{payType==1?'#cb605c':'#fdedee'}};border:1px solid #cb605c;border-radius: 20px;">{{countmoney}}元</text>
+                    <text wx:if="{{showPay}}" capture-bind:tap="goMoney" style="margin-left: 10px; margin-top: 10px; display: inline-block;padding: 2px 20px 2px 20px;font-size: 16px; color: {{payType==1?'white':'#cb605c'}};background-color: {{payType==1?'#cb605c':'#fdedee'}};border:1px solid #cb605c;border-radius: 20px;">{{countmoney}}元</text>
                 </view>
             </view>
             <view style="margin-top: 20px;" class="cu-list menu text-left solid-top solid-bottom">

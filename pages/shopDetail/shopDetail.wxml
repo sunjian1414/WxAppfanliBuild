@@ -3,7 +3,7 @@
     <swiper class="screen-swiper square-dot" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500" style="min-height: 500rpx;">
         <swiper-item wx:for="{{swiperList}}" wx:key="{{index}}" data-index="{{index}}" bind:tap="itemImgClick">
             <image src="{{item.url}}" mode="aspectFill"></image>
-        </swiper-item>
+        </swiper-item> 
     </swiper>
     <view style="background-color: #f1f1f1;">
         
