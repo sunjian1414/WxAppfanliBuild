@@ -37,6 +37,7 @@
 1. 需要申请的接口权限：
 - 位置选择权限（wx.chooseAddress）
 - 地理定位权限（wx.getLocation）
+    注：此接口非必须，但建议此申请此接口，定位是最准确的！
 2. request域名列表：
 - https://aegis.qq.com
 - https://apis.map.qq.com
