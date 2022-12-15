@@ -27,10 +27,9 @@
 </view>
 
 
-
+<!--vip广告位-->
 <view style="position: fixed;bottom: 0px;left: 0px;width: 100%;z-index: 1;padding: 20rpx;border-radius: 0px;overflow:hidden;">
-    
-    <view capture-bind:tap="openGgMenu" style="margin: 20rpx; text-align: center;line-height: 50rpx; position: absolute;z-index: 2; background-color: rgba(0,0,0,0.3);width: 120rpx;height: 50rpx;border-radius: 5px;">
+    <view wx:if="{{second>0}}" capture-bind:tap="openGgMenu" style="margin: 20rpx; text-align: center;line-height: 50rpx; position: absolute;z-index: 2; background-color: rgba(0,0,0,0.3);width: 120rpx;height: 50rpx;border-radius: 5px;">
         <text class="text-white">广告</text><text class="text-white" style="padding-left: 2px;">⏷</text>
     </view>
     <view hidden="{{!showGsMenu}}" style="border-radius: 5px; margin-left: 20rpx;margin-top: 15rpx; position: absolute;top: 80rpx; background-color: rgba(0, 0, 0, 0.8);width: 200rpx;height: 60rpx;z-index: 2;">
@@ -51,7 +50,7 @@
             <image mode="widthFix" src="https://www.ifaceai.com/img/facecode.jpg"></image>
         </view>
         <view class="cu-bar bg-white">
-            <view capture-bind:tap="downCodeHand" class="action margin-0 flex-sub solid-left" bindtap="hideModal">扫一扫</view>
+            <view capture-bind:tap="downCodeHand" class="action margin-0 flex-sub  solid-left" bindtap="hideModal">扫一扫</view>
         </view>
     </view>
 </view>
